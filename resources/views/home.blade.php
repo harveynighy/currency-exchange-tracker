@@ -1,10 +1,30 @@
 <x-layout>
     <div class="w-full">
-        @if(session('error'))
+        @if (session('rate_limit_error'))
+            <div class="bg-orange-50 border-l-4 border-orange-500 px-6 py-5 mb-6 rounded-r shadow-sm">
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 text-orange-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <div>
+                        <h3 class="text-sm font-bold text-orange-800 mb-1">Rate Limit Reached</h3>
+                        <p class="text-sm text-orange-700">You've made too many conversion requests. Please wait about 60
+                            seconds before trying again.</p>
+                        <p class="text-xs text-orange-600 mt-2">⏱️ Limit: 5 conversions per minute</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if (session('error'))
             <div class="bg-red-50 border-l-4 border-red-600 px-6 py-4 mb-6 rounded-r">
                 <div class="flex items-start">
                     <svg class="w-5 h-5 text-red-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                            clip-rule="evenodd"></path>
                     </svg>
                     <div>
                         <h4 class="text-sm font-semibold text-red-800">Error</h4>
@@ -19,22 +39,16 @@
                 <h2 class="text-xl font-semibold text-gray-900">Currency Conversion</h2>
                 <p class="text-sm text-gray-500 mt-1">Enter amount and select currencies to convert</p>
             </div>
-            
+
             <form action="{{ route('convert') }}" method="POST" class="space-y-6">
                 @csrf
-                
+
                 <div>
                     <label for="amount" class="block text-sm font-semibold text-gray-700 mb-2">Amount</label>
-                    <input 
-                        type="number" 
-                        name="amount" 
-                        id="amount" 
-                        step="0.01"
+                    <input type="number" name="amount" id="amount" step="0.01"
                         value="{{ old('amount', $amount ?? '') }}"
                         class="w-full px-4 py-3 text-lg border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
-                        placeholder="0.00"
-                        required
-                    >
+                        placeholder="0.00" required>
                     @error('amount')
                         <p class="text-red-600 text-xs mt-1.5 font-medium">{{ $message }}</p>
                     @enderror
@@ -42,36 +56,24 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="from_currency" class="block text-sm font-semibold text-gray-700 mb-2">From Currency</label>
-                        <input 
-                            type="text" 
-                            name="from_currency" 
-                            id="from_currency" 
-                            list="currency-list"
-                            maxlength="3"
-                            value="{{ old('from_currency', $from_currency ?? 'USD') }}"
+                        <label for="from_currency" class="block text-sm font-semibold text-gray-700 mb-2">From
+                            Currency</label>
+                        <input type="text" name="from_currency" id="from_currency" list="currency-list"
+                            maxlength="3" value="{{ old('from_currency', $from_currency ?? 'USD') }}"
                             class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors uppercase"
-                            placeholder="USD"
-                            required
-                        >
+                            placeholder="USD" required>
                         @error('from_currency')
                             <p class="text-red-600 text-xs mt-1.5 font-medium">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div>
-                        <label for="to_currency" class="block text-sm font-semibold text-gray-700 mb-2">To Currency</label>
-                        <input 
-                            type="text" 
-                            name="to_currency" 
-                            id="to_currency" 
-                            list="currency-list"
-                            maxlength="3"
+                        <label for="to_currency" class="block text-sm font-semibold text-gray-700 mb-2">To
+                            Currency</label>
+                        <input type="text" name="to_currency" id="to_currency" list="currency-list" maxlength="3"
                             value="{{ old('to_currency', $to_currency ?? 'EUR') }}"
                             class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors uppercase"
-                            placeholder="EUR"
-                            required
-                        >
+                            placeholder="EUR" required>
                         @error('to_currency')
                             <p class="text-red-600 text-xs mt-1.5 font-medium">{{ $message }}</p>
                         @enderror
@@ -111,21 +113,19 @@
                     <option value="NGN">Nigerian Naira</option>
                 </datalist>
 
-                <button 
-                    type="submit" 
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
-                >
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
                     Calculate Conversion
                 </button>
             </form>
         </div>
 
-        @if(isset($converted_amount))
+        @if (isset($converted_amount))
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
                 <div class="border-b border-gray-200 pb-4 mb-6">
                     <h3 class="text-lg font-semibold text-gray-900">Conversion Result</h3>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                     <div class="text-center md:text-left">
                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">From</p>
@@ -134,13 +134,14 @@
                         </p>
                         <p class="text-sm font-semibold text-gray-600 mt-1">{{ $from_currency }}</p>
                     </div>
-                    
+
                     <div class="flex items-center justify-center">
                         <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </div>
-                    
+
                     <div class="text-center md:text-right">
                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">To</p>
                         <p class="text-2xl font-bold text-blue-600">

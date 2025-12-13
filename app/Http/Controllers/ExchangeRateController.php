@@ -35,7 +35,7 @@ class ExchangeRateController extends Controller
 
             // Get rates for the base currency
             $ratesData = $this->exchangeService->getRates($fromCurrency);
-            
+
             if (isset($ratesData['conversion_rates'][$toCurrency])) {
                 $rate = $ratesData['conversion_rates'][$toCurrency];
                 $convertedAmount = $amount * $rate;
@@ -51,6 +51,14 @@ class ExchangeRateController extends Controller
 
             return back()->with('error', 'Currency not found');
         } catch (\Exception $e) {
+            // only redirect to home for rate limiting errors
+            if (str_contains($e->getMessage(), 'Too many requests')) {
+                return redirect()->route('home')
+                    ->with('rate_limit_error', true)
+                    ->withInput();
+            }
+
+            // all other errors just go back
             return back()->with('error', 'Unable to fetch exchange rates: ' . $e->getMessage());
         }
     }
