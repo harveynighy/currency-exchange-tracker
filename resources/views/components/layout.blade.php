@@ -22,7 +22,7 @@
         <div class="max-w-6xl mx-auto px-6 py-6">
             <div class="flex lg:items-center lg:justify-between lg:flex-row flex-col gap-4 justify-start items-start">
                 <div>
-                    <h1 class="text-2xl font-bold tracking-tight">The Currency Exchange Rate</h1>
+                    <a href="/" class="text-2xl font-bold tracking-tight">The Currency Exchange Rate</a>
                     <p class="text-sm text-slate-300 mt-1">Professional currency conversion service</p>
                 </div>
                 <div class="flex items-center gap-4 text-xs text-slate-300">
@@ -33,12 +33,15 @@
                     <span class="text-slate-400">|</span>
                     <span>Powered by ExchangeRate API</span>
                     <span class="text-slate-400">|</span>
-                    <div>
+                    <div class="flex items-center gap-4">
                         @auth
                             <form method="POST" action="/logout">
                                 @csrf
                                 <button type="submit" class="hover:underline">Logout</button>
                             </form>
+                            <span class="text-slate-400">|</span>
+
+                            <a href="/profile" class="ml-2 hover:underline">Profile</a>
                         @else
                             <a href="/login" class="hover:underline">Login</a>
                             <span class="text-slate-400">/</span>
