@@ -12,7 +12,7 @@
                         <h3 class="text-sm font-bold text-orange-800 mb-1">Rate Limit Reached</h3>
                         <p class="text-sm text-orange-700">You've made too many conversion requests. Please wait about 60
                             seconds before trying again.</p>
-                        <p class="text-xs text-orange-600 mt-2">⏱️ Limit: 5 conversions per minute</p>
+                        <p class="text-xs text-orange-600 mt-2">⏱️ Limit: 10 conversions per minute</p>
                     </div>
                 </div>
             </div>
