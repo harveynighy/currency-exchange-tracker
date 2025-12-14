@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
-    
+
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -20,21 +20,34 @@
 <body class="bg-gray-50 text-gray-900 min-h-screen font-['Inter'] antialiased">
     <header class="w-full bg-slate-800 text-white shadow-lg border-b-4 border-blue-600">
         <div class="max-w-6xl mx-auto px-6 py-6">
-            <div class="flex items-center justify-between">
+            <div class="flex lg:items-center lg:justify-between lg:flex-row flex-col gap-4 justify-start items-start">
                 <div>
-                    <h1 class="text-2xl font-bold tracking-tight">Currency Exchange Tracker</h1>
+                    <h1 class="text-2xl font-bold tracking-tight">The Currency Exchange Rate</h1>
                     <p class="text-sm text-slate-300 mt-1">Professional currency conversion service</p>
                 </div>
-                <div class="hidden md:flex items-center gap-4 text-xs text-slate-300">
+                <div class="flex items-center gap-4 text-xs text-slate-300">
                     <span class="flex items-center gap-1.5">
                         <span class="w-2 h-2 bg-green-400 rounded-full"></span>
                         Live Rates
                     </span>
                     <span class="text-slate-400">|</span>
                     <span>Powered by ExchangeRate API</span>
+                    <span class="text-slate-400">|</span>
+                    <div>
+                        @auth
+                            <form method="POST" action="/logout">
+                                @csrf
+                                <button type="submit" class="hover:underline">Logout</button>
+                            </form>
+                        @else
+                            <a href="/login" class="hover:underline">Login</a>
+                            <span class="text-slate-400">/</span>
+                            <a href="/register" class="hover:underline">Register</a>
+                        @endauth
+
+                    </div>
                 </div>
             </div>
-        </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-6 py-10">
