@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
@@ -51,5 +52,32 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')
             ->with('success', 'Password updated successfully!');
+    }
+
+    public function generateApiKey()
+    {
+        $user = Auth::user();
+
+        $apiKey = 'cet_' . Str::random(60); // cet = Currency Exchange Tracker
+
+        $user->update([
+            'api_key' => $apiKey
+        ]);
+
+        return redirect()->route('profile.show')
+            ->with('success', 'API Key generated successfully!')
+            ->with('api_key', $apiKey);
+    }
+
+    public function revokeApiKey()
+    {
+        $user = Auth::user();
+
+        $user->update([
+            'api_key' => null
+        ]);
+
+        return redirect()->route('profile.show')
+            ->with('success', 'API Key revoked successfully!');
     }
 }
