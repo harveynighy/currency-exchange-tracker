@@ -54,14 +54,25 @@
                     @enderror
                 </div>
 
+                @php
+                    $currencies = config('currencies.supported');
+                    $selectedFrom = old('from_currency', $from_currency ?? 'USD');
+                    $selectedTo = old('to_currency', $to_currency ?? 'EUR');
+                @endphp
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="from_currency" class="block text-sm font-semibold text-gray-700 mb-2">From
                             Currency</label>
-                        <input type="text" name="from_currency" id="from_currency" list="currency-list"
-                            maxlength="3" value="{{ old('from_currency', $from_currency ?? 'USD') }}"
-                            class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors uppercase"
-                            placeholder="USD" required>
+                        <select name="from_currency" id="from_currency"
+                            class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors bg-white"
+                            required>
+                            @foreach ($currencies as $code => $name)
+                                <option value="{{ $code }}" {{ $selectedFrom == $code ? 'selected' : '' }}>
+                                    {{ $code }} - {{ $name }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('from_currency')
                             <p class="text-red-600 text-xs mt-1.5 font-medium">{{ $message }}</p>
                         @enderror
@@ -70,48 +81,20 @@
                     <div>
                         <label for="to_currency" class="block text-sm font-semibold text-gray-700 mb-2">To
                             Currency</label>
-                        <input type="text" name="to_currency" id="to_currency" list="currency-list" maxlength="3"
-                            value="{{ old('to_currency', $to_currency ?? 'EUR') }}"
-                            class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors uppercase"
-                            placeholder="EUR" required>
+                        <select name="to_currency" id="to_currency"
+                            class="w-full px-4 py-3 text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors bg-white"
+                            required>
+                            @foreach ($currencies as $code => $name)
+                                <option value="{{ $code }}" {{ $selectedTo == $code ? 'selected' : '' }}>
+                                    {{ $code }} - {{ $name }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('to_currency')
                             <p class="text-red-600 text-xs mt-1.5 font-medium">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
-
-                <datalist id="currency-list">
-                    <option value="USD">US Dollar</option>
-                    <option value="EUR">Euro</option>
-                    <option value="GBP">British Pound</option>
-                    <option value="JPY">Japanese Yen</option>
-                    <option value="AUD">Australian Dollar</option>
-                    <option value="CAD">Canadian Dollar</option>
-                    <option value="CHF">Swiss Franc</option>
-                    <option value="CNY">Chinese Yuan</option>
-                    <option value="INR">Indian Rupee</option>
-                    <option value="MXN">Mexican Peso</option>
-                    <option value="BRL">Brazilian Real</option>
-                    <option value="ZAR">South African Rand</option>
-                    <option value="NZD">New Zealand Dollar</option>
-                    <option value="SGD">Singapore Dollar</option>
-                    <option value="HKD">Hong Kong Dollar</option>
-                    <option value="NOK">Norwegian Krone</option>
-                    <option value="SEK">Swedish Krona</option>
-                    <option value="DKK">Danish Krone</option>
-                    <option value="PLN">Polish Zloty</option>
-                    <option value="THB">Thai Baht</option>
-                    <option value="IDR">Indonesian Rupiah</option>
-                    <option value="MYR">Malaysian Ringgit</option>
-                    <option value="PHP">Philippine Peso</option>
-                    <option value="KRW">South Korean Won</option>
-                    <option value="TRY">Turkish Lira</option>
-                    <option value="RUB">Russian Ruble</option>
-                    <option value="AED">UAE Dirham</option>
-                    <option value="SAR">Saudi Riyal</option>
-                    <option value="EGP">Egyptian Pound</option>
-                    <option value="NGN">Nigerian Naira</option>
-                </datalist>
 
                 <button type="submit"
                     class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-6 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
