@@ -11,7 +11,7 @@ class ExchangeRateServiceTest extends TestCase
 {
     public function test_get_rates_returns_exchange_rates()
     {
-        // Mock the API response
+        // mock the API response
         Http::fake([
             '*' => Http::response([
                 'conversion_rates' => [
