@@ -7,13 +7,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Conversion;
 
 class ProfileController extends Controller
 {
     public function show()
     {
+        $conversions = Conversion::where('user_id', Auth::user()->id)
+            ->latest()
+            ->get();
+
         return view('profile.show', [
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'conversions' => $conversions
         ]);
     }
 

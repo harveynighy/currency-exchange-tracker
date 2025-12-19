@@ -13,17 +13,17 @@ Route::post('/convert', [ExchangeRateController::class, 'convert'])->name('conve
 // Profile Routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])
-    ->name('profile.show');
+        ->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])
-    ->name('profile.edit');
+        ->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])
-    ->name('profile.update');
+        ->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])
-    ->name('profile.password');
+        ->name('profile.password');
     Route::post('/profile/api-key/generate', [ProfileController::class, 'generateApiKey'])
-    ->name('profile.api-key.generate');
+        ->name('profile.api-key.generate');
     Route::delete('/profile/api-key/revoke', [ProfileController::class, 'revokeApiKey'])
-    ->name('profile.api-key.revoke');
+        ->name('profile.api-key.revoke');
 });
 
 // Register Routes

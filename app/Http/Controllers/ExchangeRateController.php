@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\ExchangeRateService;
 use Illuminate\Http\Request;
+use App\Models\Conversion;
+use Illuminate\Support\Facades\Auth;
 
 class ExchangeRateController extends Controller
 {
@@ -39,6 +41,17 @@ class ExchangeRateController extends Controller
             if (isset($ratesData['conversion_rates'][$toCurrency])) {
                 $rate = $ratesData['conversion_rates'][$toCurrency];
                 $convertedAmount = $amount * $rate;
+
+                if (Auth::user()) {
+                    Conversion::create([
+                        'user_id' => Auth::user()->id,
+                        'amount' => $amount,
+                        'from_currency' => $fromCurrency,
+                        'to_currency' => $toCurrency,
+                        'conversion_result' => $convertedAmount,
+                    ]);
+                }
+
 
                 return view('home', [
                     'amount' => $amount,
