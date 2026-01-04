@@ -12,7 +12,7 @@ class AuthenticateApiKey
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -36,8 +36,13 @@ class AuthenticateApiKey
             ], 401);
         }
 
-        $request->merge(['authenticated_user' => $user]);
+        // Attach user safely
+        $request->attributes->set('authenticated_user', $user);
+
+        // Optional: integrate with Laravel auth()
+        auth()->setUser($user);
 
         return $next($request);
     }
+
 }

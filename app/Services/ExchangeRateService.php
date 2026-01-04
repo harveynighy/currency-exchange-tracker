@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\RateLimiter;
 
 class ExchangeRateService
 {
-    protected $apiKey;
-    protected $apiUrl;
-    protected $apiVersion = 'v6';
+    protected string $apiKey;
+    protected string $apiUrl;
+    protected string $apiVersion = 'v6';
 
     /**
      * Create a new class instance.
@@ -42,7 +42,7 @@ class ExchangeRateService
         return Cache::remember("rates_{$baseCurrency}", 3600, function () use ($baseCurrency) {
             try {
                 $response = Http::timeout(10) // timeout after 10 seconds
-                    ->get("{$this->apiUrl}/{$baseCurrency}");
+                ->get("{$this->apiUrl}/{$baseCurrency}");
 
                 if ($response->successful()) {
                     $data = $response->json();

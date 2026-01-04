@@ -1,0 +1,83 @@
+SNAPSHOTS
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('exchange_rate_snapshots', function (Blueprint $table) {
+            $table->id();
+
+            // The "as-of" day for the snapshot (store as date, not datetime)
+            $table->date('rate_date');
+
+            // Base currency for all rates in this snapshot (typically USD)
+            $table->char('base', 3)->default('USD');
+
+            // Which external provider/API produced this snapshot
+            $table->string('provider', 50)->default('default');
+
+            // When you actually fetched it (helps debug + refresh logic)
+            $table->timestamp('fetched_at')->nullable();
+
+            // Optional: mark snapshot as complete (all currencies inserted)
+            $table->boolean('is_complete')->default(false);
+
+            $table->timestamps();
+
+            // Prevent duplicates and make lookups fast
+            $table->unique(['rate_date', 'base', 'provider'], 'snapshots_unique_day_base_provider');
+            $table->index(['rate_date', 'provider'], 'snapshots_rate_date_provider_idx');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('exchange_rate_snapshots');
+    }
+};
+
+
+EXCHANGE RATES
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('exchange_rates', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('exchange_rate_snapshot_id')
+                ->constrained('exchange_rate_snapshots')
+                ->cascadeOnDelete();
+
+            // Currency code for this row
+            $table->char('currency', 3);
+
+            // Rate relative to snapshot.base (e.g. USD->GBP)
+            $table->decimal('rate', 18, 8);
+
+            $table->timestamps();
+
+            // One rate per currency per snapshot
+            $table->unique(['exchange_rate_snapshot_id', 'currency'], 'rates_unique_snapshot_currency');
+
+            // Helpful for queries like "give me GBP over time"
+            $table->index(['currency', 'exchange_rate_snapshot_id'], 'rates_currency_snapshot_idx');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('exchange_rates');
+    }
+};
+
+
