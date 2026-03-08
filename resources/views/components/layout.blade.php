@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Currency Exchange Tracker') }}</title>
+    <title>{{ config('app.name', 'FX Tracker') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,51 +17,63 @@
     @endif
 </head>
 
-<body class="bg-gray-50 text-gray-900 min-h-screen font-['Inter'] antialiased">
-    <header class="w-full bg-slate-800 text-white shadow-lg border-b-4 border-blue-600">
-        <div class="max-w-6xl mx-auto px-6 py-6">
-            <div class="flex lg:items-center lg:justify-between lg:flex-row flex-col gap-4 justify-start items-start">
+<body class="min-h-screen font-['Inter'] antialiased">
+    <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-8 py-5">
+            <div class="flex items-center gap-4">
                 <div>
-                    <a href="/" class="text-2xl font-bold tracking-tight">The Currency Exchange Rate</a>
-                    <p class="text-sm text-slate-300 mt-1">Professional currency conversion service</p>
-                </div>
-                <div class="flex items-center gap-4 text-xs text-slate-300">
-                    <span class="flex items-center gap-1.5">
-                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-                        Live Rates
-                    </span>
-                    <span class="text-slate-400">|</span>
-                    <span>Powered by ExchangeRate API</span>
-                    <span class="text-slate-400">|</span>
-                    <div class="flex items-center gap-4">
-                        @auth
-                            <form method="POST" action="/logout">
-                                @csrf
-                                <button type="submit" class="hover:underline">Logout</button>
-                            </form>
-                            <span class="text-slate-400">|</span>
-
-                            <a href="/profile" class="ml-2 hover:underline">Profile</a>
-                        @else
-                            <a href="/login" class="hover:underline">Login</a>
-                            <span class="text-slate-400">/</span>
-                            <a href="/register" class="hover:underline">Register</a>
-                        @endauth
-
-                    </div>
+                    <a href="/" class="inline-block">
+                        <img src="{{ asset('fx-tracker-logo.png') }}" alt="FX Tracker" class="h-8 w-auto">
+                    </a>
+                    <p class="text-xs text-slate-500">A sub-division of Infinite Finances</p>
                 </div>
             </div>
+
+            <div class="flex items-center gap-4 text-sm text-slate-700">
+                <span class="status-pill hidden sm:inline-flex">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                    Live Rates
+                </span>
+                @auth
+                    <a href="/profile" class="secondary-btn px-4 py-2 text-sm">Profile</a>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button type="submit" class="primary-btn px-4 py-2 text-sm">Logout</button>
+                    </form>
+                @else
+                    <a href="/login" class="secondary-btn px-4 py-2 text-sm">Login</a>
+                    <a href="/register" class="primary-btn px-4 py-2 text-sm">Create account</a>
+                @endauth
+            </div>
+        </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-10">
+    <main class="mx-auto max-w-7xl px-8 py-14">
         {{ $slot }}
     </main>
 
-    <footer class="border-t border-gray-200 mt-auto">
-        <div class="max-w-6xl mx-auto px-6 py-6">
-            <p class="text-center text-xs text-gray-500">
-                © {{ date('Y') }} Currency Exchange Tracker. All rights reserved.
-            </p>
+    <footer class="mt-auto border-t border-slate-200">
+        <div class="mx-auto max-w-7xl px-8 py-8">
+            <div class="mb-6 space-y-4">
+                <p class="text-center text-xs text-slate-500">
+                    © {{ date('Y') }} FX Tracker · A sub-division of Infinite Finances.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 text-center text-xs text-slate-600">
+                    <a href="{{ route('privacy-policy') }}" class="hover:text-blue-600">Privacy Policy</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('cookie-policy') }}" class="hover:text-blue-600">Cookie Policy</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('terms-of-service') }}" class="hover:text-blue-600">Terms of Service</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('refund-policy') }}" class="hover:text-blue-600">Refund Policy</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('acceptable-use-policy') }}" class="hover:text-blue-600">Acceptable Use</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('data-processing-agreement') }}" class="hover:text-blue-600">DPA</a>
+                    <span class="text-slate-300">·</span>
+                    <a href="{{ route('api-terms') }}" class="hover:text-blue-600">API Terms</a>
+                </div>
+            </div>
         </div>
     </footer>
 </body>

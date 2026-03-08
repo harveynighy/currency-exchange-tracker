@@ -53,7 +53,7 @@ class ExchangeRateController extends Controller
                 }
 
 
-                return view('home', [
+                return view('results', [
                     'amount' => $amount,
                     'from_currency' => $fromCurrency,
                     'to_currency' => $toCurrency,

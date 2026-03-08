@@ -46,3 +46,12 @@ Route::view('/login', 'auth.login')
 
 Route::post('/login', Login::class)
     ->middleware('guest');
+
+// Policy Routes
+Route::view('/privacy-policy', 'policies.privacy-policy')->name('privacy-policy');
+Route::view('/cookie-policy', 'policies.cookie-policy')->name('cookie-policy');
+Route::view('/data-processing-agreement', 'policies.data-processing-agreement')->name('data-processing-agreement');
+Route::view('/terms-of-service', 'policies.terms-of-service')->name('terms-of-service');
+Route::view('/refund-policy', 'policies.refund-policy')->name('refund-policy');
+Route::view('/acceptable-use-policy', 'policies.acceptable-use-policy')->name('acceptable-use-policy');
+Route::view('/api-terms', 'policies.api-terms')->name('api-terms');

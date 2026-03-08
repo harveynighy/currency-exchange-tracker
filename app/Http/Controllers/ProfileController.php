@@ -64,7 +64,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $apiKey = 'cet_' . Str::random(60); // cet = Currency Exchange Tracker
+        $apiKey = 'fxt_' . Str::random(60); // fxt = FX Tracker
 
         $user->update([
             'api_key' => $apiKey

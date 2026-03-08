@@ -6,5 +6,56 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: "Roboto", sans-serif;
+    --font-sans: "Inter", "Roboto", sans-serif;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+}
+
+@layer base {
+    body {
+        @apply bg-white text-slate-900;
+        background-image: radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.08), transparent 38%),
+            radial-gradient(circle at 85% 12%, rgba(29, 78, 216, 0.06), transparent 42%),
+            linear-gradient(180deg, #ffffff 0%, #f8fafc 48%, #ffffff 100%);
+    }
+}
+
+@layer components {
+    .glass-panel {
+        @apply rounded-2xl border border-slate-200 bg-white/95 backdrop-blur shadow-sm;
+    }
+
+    .section-title {
+        @apply text-slate-900 text-xl font-semibold tracking-tight;
+    }
+
+    .section-subtitle {
+        @apply text-sm text-slate-600;
+    }
+
+    .form-label {
+        @apply mb-2 block text-sm font-medium text-slate-700;
+    }
+
+    .form-input {
+        @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/30;
+    }
+
+    .primary-btn {
+        @apply inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-3 font-semibold text-white transition hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-400/50;
+    }
+
+    .secondary-btn {
+        @apply inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50;
+    }
+
+    .status-pill {
+        @apply inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700;
+    }
+
+    .table-shell {
+        @apply overflow-hidden rounded-2xl border border-slate-200 bg-white;
+    }
 }

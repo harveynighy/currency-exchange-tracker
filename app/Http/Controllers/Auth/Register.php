@@ -26,6 +26,6 @@ class Register extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Welcome to The Currency Exchange Rate!');
+        return redirect('/')->with('success', 'Welcome to FX Tracker!');
     }
 }

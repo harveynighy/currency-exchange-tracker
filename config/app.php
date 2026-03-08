@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Currency Exchange Tracker'),
+    'name' => env('APP_NAME', 'FX Tracker'),
 
     /*
     |--------------------------------------------------------------------------
