@@ -19,17 +19,17 @@
 
 <body class="min-h-screen font-['Inter'] antialiased">
     <header class="sticky top-0 z-20 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-8 py-5">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-8 sm:py-5">
             <div class="flex items-center gap-4">
                 <div>
                     <a href="/" class="inline-block">
-                        <img src="{{ asset('fx-tracker-logo.png') }}" alt="FX Tracker" class="h-8 w-auto">
+                        <img src="{{ asset('fx-tracker-logo.png') }}" alt="FX Tracker" class="h-8 w-auto max-w-[50vw] object-contain sm:max-w-none">
                     </a>
                     <p class="text-xs text-slate-500">A sub-division of Infinite Finances</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-4 text-sm text-slate-700">
+            <div class="hidden items-center gap-3 text-sm text-slate-700 md:flex">
                 <span class="status-pill hidden sm:inline-flex">
                     <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
                     Live Rates
@@ -45,10 +45,51 @@
                     <a href="/register" class="primary-btn px-4 py-2 text-sm">Create account</a>
                 @endauth
             </div>
+
+            <button id="mobile-menu-toggle" type="button"
+                class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white p-2 text-slate-700 shadow-sm transition hover:bg-slate-50 md:hidden"
+                aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden border-t border-slate-200 px-4 py-3 md:hidden">
+            <div class="flex flex-col gap-2">
+                <span class="status-pill inline-flex w-fit">
+                    <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                    Live Rates
+                </span>
+                @auth
+                    <a href="/profile" class="secondary-btn w-full px-3 py-2 text-center text-sm">Profile</a>
+                    <form method="POST" action="/logout" class="w-full">
+                        @csrf
+                        <button type="submit" class="primary-btn w-full px-3 py-2 text-sm">Logout</button>
+                    </form>
+                @else
+                    <a href="/login" class="secondary-btn w-full px-3 py-2 text-center text-sm">Login</a>
+                    <a href="/register" class="primary-btn w-full px-3 py-2 text-center text-sm">Create account</a>
+                @endauth
+            </div>
         </div>
     </header>
 
-    <main class="mx-auto max-w-7xl px-8 py-14">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('mobile-menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener('click', function() {
+                menu.classList.toggle('hidden');
+                toggle.setAttribute('aria-expanded', menu.classList.contains('hidden') ? 'false' : 'true');
+            });
+        });
+    </script>
+
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-14">
         {{ $slot }}
     </main>
 

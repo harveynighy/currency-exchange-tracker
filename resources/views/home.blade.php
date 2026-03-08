@@ -286,7 +286,7 @@
                 <!-- Hidden - keeping for structure but not displaying -->
             </div>
 
-            <div class="space-y-6 lg:col-span-2">
+            <div class="min-w-0 space-y-6 lg:col-span-2">
                 <div class="glass-panel p-7">
                     <h3 class="text-lg font-semibold text-slate-900">Live Result</h3>
                     <p class="mt-1 text-sm text-slate-600">Current conversion output and quoted rate.</p>
@@ -319,18 +319,20 @@
                     @endif
                 </div>
 
-                <div id="developer" class="glass-panel p-7">
+                <div id="developer" class="glass-panel min-w-0 p-7">
                     <h3 class="text-lg font-semibold text-slate-900">Developer Friendly</h3>
                     <p class="mt-1 text-sm text-slate-600">Use your API key to integrate conversion into apps and internal tools.</p>
 
                     <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
                         <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Endpoint</p>
-                        <p class="font-mono text-sm text-slate-900">GET {{ config('app.url') }}/api/v1/convert</p>
+                        <div class="overflow-x-auto">
+                            <p class="w-max min-w-full whitespace-nowrap font-mono text-sm text-slate-900">GET {{ config('app.url') }}/api/v1/convert</p>
+                        </div>
                     </div>
 
                     <div class="mt-4 rounded-xl border border-slate-200 bg-slate-900 p-4">
                         <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Example Request</p>
-                        <pre class="overflow-x-auto text-xs leading-6 text-emerald-300">curl -X GET "{{ config('app.url') }}/api/v1/convert?amount=100&from=GBP&to=USD" \
+                        <pre class="max-w-full overflow-x-auto whitespace-nowrap text-xs leading-6 text-emerald-300">curl -X GET "{{ config('app.url') }}/api/v1/convert?amount=100&from=GBP&to=USD" \
   -H "Authorization: Bearer YOUR_API_KEY"</pre>
                     </div>
                 </div>
