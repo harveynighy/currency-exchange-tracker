@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ImportHistoricalRates extends Command
 {
-    protected $signature = 'import:historical-rates {file=exchange_rates.csv}';
-    protected $description = 'Import historical exchange rates from CSV file';
+    protected $signature = 'import:historical-rates {file=eurofxref-hist-2.csv}';
+    protected $description = 'Import ECB historical exchange rates from CSV (EUR-based)';
 
     public function handle()
     {
@@ -30,110 +30,99 @@ class ImportHistoricalRates extends Command
             $this->line('Upload the CSV to your Cloud storage bucket and ensure FILESYSTEM_DISK=s3 is set.');
             return 1;
         }
+        // ECB format: single header line (Date + currency codes), data from line 2 onwards
         $lines = explode("\n", $csvContent);
-        
-        // Skip first 2 header lines and get currency headers from line 3
-        $headerLine = $lines[2] ?? '';
-        $headers = str_getcsv($headerLine);
-        
-        // First column is "Date", rest are currency pairs like "Australian dollar (AUD)"
+
+        // Line 1: header — "Date,USD,JPY,GBP,..."
+        $headers = str_getcsv(rtrim($lines[0] ?? '', ','));
+
+        // Build column index -> currency code map (skip index 0 which is "Date")
         $currencyColumns = [];
         foreach ($headers as $index => $header) {
-            if ($index === 0) continue; // Skip "Date" column
-            
-            // Extract currency code from format like "Australian dollar (AUD)"
-            if (preg_match('/\(([A-Z]{3})\)/', $header, $matches)) {
-                $currencyColumns[$index] = $matches[1];
-            }
+            $code = strtoupper(trim($header));
+            if ($index === 0 || $code === '' || $code === 'DATE') continue;
+            $currencyColumns[$index] = $code;
         }
 
-        $this->info('Found ' . count($currencyColumns) . ' currencies to import');
-        $this->info('Processing ' . (count($lines) - 3) . ' date records...');
+        $dataLines = array_slice($lines, 1);
+        $totalLines = count(array_filter($dataLines, fn($l) => trim($l, ', ') !== ''));
 
-        $bar = $this->output->createProgressBar(count($lines) - 3);
+        $this->info('Base currency : EUR (ECB reference rates)');
+        $this->info('Currencies    : ' . count($currencyColumns));
+        $this->info('Date records  : ' . $totalLines);
+
+        $bar = $this->output->createProgressBar($totalLines);
         $bar->start();
 
         $importedSnapshots = 0;
-        $importedRates = 0;
-        $baseCurrency = 'GBP'; // The CSV appears to be GBP-based rates
+        $importedRates     = 0;
+        $baseCurrency      = 'EUR';
+        $batchSize         = 200;
+        $rateBatch         = [];
 
         DB::beginTransaction();
-        
+
         try {
-            // Process data lines (skip first 3 header/title lines)
-            for ($i = 3; $i < count($lines); $i++) {
-                $line = trim($lines[$i]);
-                if (empty($line)) continue;
+            foreach ($dataLines as $line) {
+                $line = trim($line, " ,\r");
+                if ($line === '') continue;
 
                 $values = str_getcsv($line);
-                $dateStr = $values[0] ?? '';
-                
-                if (empty($dateStr)) continue;
+                $dateStr = trim($values[0] ?? '');
+                if ($dateStr === '') continue;
 
-                // Parse date from format like "1994-01-03"
-                try {
-                    $date = \Carbon\Carbon::createFromFormat('Y-m-d', $dateStr)->startOfDay();
-                } catch (\Exception $e) {
-                    $this->warn("Invalid date format: {$dateStr}");
-                    continue;
-                }
+                // Validate date format YYYY-MM-DD
+                if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateStr)) continue;
 
-                // Create or get snapshot for this date
-                $snapshot = ExchangeRateSnapshot::firstOrCreate([
-                    'base' => $baseCurrency,
-                    'rate_date' => $date,
-                    'provider' => 'historical_import',
-                ], [
-                    'fetched_at' => now(),
-                    'is_complete' => false,
-                ]);
+                $snapshot = ExchangeRateSnapshot::firstOrCreate(
+                    ['base' => $baseCurrency, 'rate_date' => $dateStr, 'provider' => 'ecb'],
+                    ['fetched_at' => now(), 'is_complete' => false]
+                );
 
-                $ratesForSnapshot = [];
+                $hasRates = false;
 
-                // Process each currency column
-                foreach ($currencyColumns as $columnIndex => $currencyCode) {
-                    $rateValue = $values[$columnIndex] ?? null;
-                    
-                    if ($rateValue === null || $rateValue === '' || !is_numeric($rateValue)) {
-                        continue;
-                    }
+                foreach ($currencyColumns as $colIndex => $currencyCode) {
+                    $raw = trim($values[$colIndex] ?? '');
+                    if ($raw === '' || $raw === 'N/A' || !is_numeric($raw)) continue;
 
-                    $ratesForSnapshot[] = [
+                    $rateBatch[] = [
                         'exchange_rate_snapshot_id' => $snapshot->id,
-                        'currency' => $currencyCode,
-                        'rate' => (float) $rateValue,
+                        'currency'   => $currencyCode,
+                        'rate'       => (float) $raw,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
+                    $hasRates = true;
                 }
 
-                // Bulk insert rates for this snapshot
-                if (!empty($ratesForSnapshot)) {
-                    ExchangeRate::upsert(
-                        $ratesForSnapshot,
-                        ['exchange_rate_snapshot_id', 'currency'],
-                        ['rate', 'updated_at']
-                    );
-                    
-                    $importedRates += count($ratesForSnapshot);
-                    
-                    // Mark snapshot as complete
+                if ($hasRates) {
                     $snapshot->update(['is_complete' => true]);
                     $importedSnapshots++;
+                }
+
+                // Flush in batches to avoid memory issues
+                if (count($rateBatch) >= $batchSize) {
+                    ExchangeRate::upsert($rateBatch, ['exchange_rate_snapshot_id', 'currency'], ['rate', 'updated_at']);
+                    $importedRates += count($rateBatch);
+                    $rateBatch = [];
                 }
 
                 $bar->advance();
             }
 
+            // Flush remaining
+            if (!empty($rateBatch)) {
+                ExchangeRate::upsert($rateBatch, ['exchange_rate_snapshot_id', 'currency'], ['rate', 'updated_at']);
+                $importedRates += count($rateBatch);
+            }
+
             DB::commit();
             $bar->finish();
             $this->newLine(2);
-            
-            $this->info("✓ Successfully imported {$importedSnapshots} snapshots");
-            $this->info("✓ Successfully imported {$importedRates} exchange rates");
-            
+            $this->info("✓ Imported {$importedSnapshots} snapshots");
+            $this->info("✓ Imported {$importedRates} exchange rates");
             return 0;
-            
+
         } catch (\Exception $e) {
             DB::rollBack();
             $bar->finish();
