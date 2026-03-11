@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ImportHistoricalRates extends Command
 {
-    protected $signature = 'import:historical-rates {file=eurofxref-hist-2.csv}';
-    protected $description = 'Import ECB historical exchange rates from CSV (EUR-based)';
+    protected $signature = 'import:historical-rates {file=Exchange_Rate_Report_Base_USD.csv}';
+    protected $description = 'Import historical exchange rates from CSV (USD-based)';
 
     public function handle()
     {
@@ -30,24 +30,36 @@ class ImportHistoricalRates extends Command
             $this->line('Upload the CSV to your Cloud storage bucket and ensure FILESYSTEM_DISK=s3 is set.');
             return 1;
         }
-        // ECB format: single header line (Date + currency codes), data from line 2 onwards
+        // Format: single header line (Date + currency names with ISO code in parentheses), data from line 2 onwards
         $lines = explode("\n", $csvContent);
 
-        // Line 1: header — "Date,USD,JPY,GBP,..."
+        // Line 1: header — "Date,Algerian dinar (DZD),...,U.S. dollar (USD),..."
         $headers = str_getcsv(rtrim($lines[0] ?? '', ','));
 
         // Build column index -> currency code map (skip index 0 which is "Date")
         $currencyColumns = [];
         foreach ($headers as $index => $header) {
-            $code = strtoupper(trim($header));
-            if ($index === 0 || $code === '' || $code === 'DATE') continue;
+            if ($index === 0) {
+                continue;
+            }
+
+            $header = trim($header);
+            if ($header === '' || strtoupper($header) === 'DATE') {
+                continue;
+            }
+
+            $code = strtoupper($header);
+            if (preg_match('/\(([A-Z]{3})\)/', $header, $matches)) {
+                $code = $matches[1];
+            }
+
             $currencyColumns[$index] = $code;
         }
 
         $dataLines = array_slice($lines, 1);
         $totalLines = count(array_filter($dataLines, fn($l) => trim($l, ', ') !== ''));
 
-        $this->info('Base currency : EUR (ECB reference rates)');
+        $this->info('Base currency : USD');
         $this->info('Currencies    : ' . count($currencyColumns));
         $this->info('Date records  : ' . $totalLines);
 
@@ -56,7 +68,7 @@ class ImportHistoricalRates extends Command
 
         $importedSnapshots = 0;
         $importedRates     = 0;
-        $baseCurrency      = 'EUR';
+        $baseCurrency      = 'USD';
         $batchSize         = 200;
         $rateBatch         = [];
 
@@ -75,7 +87,7 @@ class ImportHistoricalRates extends Command
                 if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateStr)) continue;
 
                 $snapshot = ExchangeRateSnapshot::firstOrCreate(
-                    ['base' => $baseCurrency, 'rate_date' => $dateStr, 'provider' => 'ecb'],
+                    ['base' => $baseCurrency, 'rate_date' => $dateStr, 'provider' => 'historical_import'],
                     ['fetched_at' => now(), 'is_complete' => false]
                 );
 
@@ -84,6 +96,7 @@ class ImportHistoricalRates extends Command
                 foreach ($currencyColumns as $colIndex => $currencyCode) {
                     $raw = trim($values[$colIndex] ?? '');
                     if ($raw === '' || $raw === 'N/A' || !is_numeric($raw)) continue;
+                    if ($currencyCode === $baseCurrency) continue;
 
                     $rateBatch[] = [
                         'exchange_rate_snapshot_id' => $snapshot->id,

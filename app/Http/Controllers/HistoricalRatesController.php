@@ -52,9 +52,9 @@ class HistoricalRatesController extends Controller
         $cacheKey = "chart_data_{$from}_{$to}_{$period}";
 
         $data = Cache::remember($cacheKey, 3600, function () use ($from, $to, $startDate, $endDate) {
-            // EUR is the base currency (ECB reference rates) — it has no row in exchange_rates.
+            // USD is the base currency in imported historical data.
             // Use a single JOIN query to fetch both rates in one round-trip.
-            $base = 'EUR';
+            $base = 'USD';
 
             $db = \Illuminate\Support\Facades\DB::table('exchange_rate_snapshots as s')
                 ->whereBetween('s.rate_date', [$startDate, $endDate])
@@ -65,7 +65,7 @@ class HistoricalRatesController extends Controller
             if ($from === $base && $to === $base) {
                 return [];
             } elseif ($from === $base) {
-                // Rate is simply EUR→TO
+                // Rate is simply USD→TO
                 $rows = $db->join('exchange_rates as to_r', function ($join) use ($to) {
                         $join->on('to_r.exchange_rate_snapshot_id', '=', 's.id')
                              ->where('to_r.currency', $to);
@@ -79,7 +79,7 @@ class HistoricalRatesController extends Controller
                 ])->values()->toArray();
 
             } elseif ($to === $base) {
-                // Rate is 1 / (EUR→FROM)
+                // Rate is 1 / (USD→FROM)
                 $rows = $db->join('exchange_rates as from_r', function ($join) use ($from) {
                         $join->on('from_r.exchange_rate_snapshot_id', '=', 's.id')
                              ->where('from_r.currency', $from);
@@ -94,7 +94,7 @@ class HistoricalRatesController extends Controller
                     ])->values()->toArray();
 
             } else {
-                // Cross rate: (EUR→TO) / (EUR→FROM)
+                // Cross rate: (USD→TO) / (USD→FROM)
                 $rows = $db->join('exchange_rates as from_r', function ($join) use ($from) {
                         $join->on('from_r.exchange_rate_snapshot_id', '=', 's.id')
                              ->where('from_r.currency', $from);

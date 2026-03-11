@@ -19,11 +19,11 @@
                     </div>
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">Currencies</p>
-                        <p class="mt-1 font-semibold text-slate-900">50+ Supported</p>
+                        <p class="mt-1 font-semibold text-slate-900">50 Supported</p>
                     </div>
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">Data Points</p>
-                        <p class="mt-1 font-semibold text-slate-900">262K+ Rates</p>
+                        <p class="mt-1 font-semibold text-slate-900">254K+ Rates</p>
                     </div>
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">System Status</p>
