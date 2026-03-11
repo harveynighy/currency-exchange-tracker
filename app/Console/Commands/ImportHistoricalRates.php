@@ -17,14 +17,19 @@ class ImportHistoricalRates extends Command
     {
         $filePath = $this->argument('file');
         $fullPath = storage_path('app/' . $filePath);
-        
-        if (!file_exists($fullPath)) {
-            $this->error("File not found: {$fullPath}");
+
+        // Try local storage first, then fall back to the default filesystem disk (S3 on Cloud)
+        if (file_exists($fullPath)) {
+            $this->info('Reading CSV from local storage...');
+            $csvContent = file_get_contents($fullPath);
+        } elseif (Storage::exists($filePath)) {
+            $this->info('Reading CSV from cloud storage...');
+            $csvContent = Storage::get($filePath);
+        } else {
+            $this->error("File not found locally ({$fullPath}) or in cloud storage ({$filePath})");
+            $this->line('Upload the CSV to your Cloud storage bucket and ensure FILESYSTEM_DISK=s3 is set.');
             return 1;
         }
-
-        $this->info('Reading CSV file...');
-        $csvContent = file_get_contents($fullPath);
         $lines = explode("\n", $csvContent);
         
         // Skip first 2 header lines and get currency headers from line 3
