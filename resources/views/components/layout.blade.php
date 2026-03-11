@@ -30,6 +30,8 @@
             </div>
 
             <div class="hidden items-center gap-3 text-sm text-slate-700 md:flex">
+                <a href="/charts" class="rounded-lg px-3 py-2 font-semibold text-blue-600 transition hover:bg-blue-50">Historical Charts</a>
+                <a href="/api-docs" class="rounded-lg px-3 py-2 font-medium transition hover:bg-slate-100">API Docs</a>
                 <span class="status-pill hidden sm:inline-flex">
                     <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
                     Live Rates
@@ -57,6 +59,8 @@
 
         <div id="mobile-menu" class="hidden border-t border-slate-200 px-4 py-3 md:hidden">
             <div class="flex flex-col gap-2">
+                <a href="/charts" class="rounded-lg bg-blue-50 px-3 py-2 text-center font-semibold text-blue-600 transition hover:bg-blue-100">Historical Charts</a>
+                <a href="/api-docs" class="rounded-lg px-3 py-2 text-center font-medium transition hover:bg-slate-100">API Docs</a>
                 <span class="status-pill inline-flex w-fit">
                     <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
                     Live Rates

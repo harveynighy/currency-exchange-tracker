@@ -3,27 +3,27 @@
         <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
                 <div>
-                    <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Modern FX Platform</p>
-                    <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">FX Tracker</h1>
-                    <p class="mt-4 max-w-xl text-base text-slate-600">A modern, developer-friendly conversion workspace for teams that need speed, accuracy, and clean API access.</p>
+                    <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">32 Years of Historical Data</p>
+                    <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">FX Historical Analysis Platform</h1>
+                    <p class="mt-4 max-w-xl text-base text-slate-600">Explore three decades of currency exchange rate trends with interactive charts, comprehensive API access, and real-time conversion tools.</p>
                     <div class="mt-7 flex flex-wrap items-center gap-3">
-                        <a href="#converter" class="primary-btn">Start converting</a>
-                        <a href="#developer" class="secondary-btn">Developer API</a>
+                        <a href="/charts" class="primary-btn">Explore Charts</a>
+                        <a href="#converter" class="secondary-btn">Quick Convert</a>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 text-sm">
                     <div class="glass-panel p-4">
-                        <p class="text-slate-500">Platform</p>
-                        <p class="mt-1 font-semibold text-slate-900">Infinite Finances</p>
+                        <p class="text-slate-500">Historical Data</p>
+                        <p class="mt-1 font-semibold text-slate-900">1994 - Present</p>
                     </div>
                     <div class="glass-panel p-4">
-                        <p class="text-slate-500">Product</p>
-                        <p class="mt-1 font-semibold text-slate-900">FX Tracker</p>
+                        <p class="text-slate-500">Currencies</p>
+                        <p class="mt-1 font-semibold text-slate-900">50+ Supported</p>
                     </div>
                     <div class="glass-panel p-4">
-                        <p class="text-slate-500">Rate Source</p>
-                        <p class="mt-1 font-semibold text-slate-900">ExchangeRate API</p>
+                        <p class="text-slate-500">Data Points</p>
+                        <p class="mt-1 font-semibold text-slate-900">262K+ Rates</p>
                     </div>
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">System Status</p>
@@ -35,19 +35,19 @@
 
         <section class="grid gap-4 md:grid-cols-3">
             <div class="glass-panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Historical Charts</p>
+                <p class="mt-2 text-2xl font-semibold text-slate-900">32 years of data</p>
+                <p class="mt-2 text-sm text-slate-600">Visualize decades of currency trends with interactive charts and analysis tools.</p>
+            </div>
+            <div class="glass-panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Developer API</p>
+                <p class="mt-2 text-2xl font-semibold text-slate-900">Historical endpoints</p>
+                <p class="mt-2 text-sm text-slate-600">Access historical exchange rate data programmatically via REST API.</p>
+            </div>
+            <div class="glass-panel p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Live Conversion</p>
                 <p class="mt-2 text-2xl font-semibold text-slate-900">Real-time rates</p>
-                <p class="mt-2 text-sm text-slate-600">Always calculate with fresh market data from the configured provider.</p>
-            </div>
-            <div class="glass-panel p-5">
-                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Developer First</p>
-                <p class="mt-2 text-2xl font-semibold text-slate-900">Simple API access</p>
-                <p class="mt-2 text-sm text-slate-600">Generate API keys and integrate conversion endpoints quickly.</p>
-            </div>
-            <div class="glass-panel p-5">
-                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Reliable UX</p>
-                <p class="mt-2 text-2xl font-semibold text-slate-900">Rate-limited safety</p>
-                <p class="mt-2 text-sm text-slate-600">Built-in throttling protects platform stability and performance.</p>
+                <p class="mt-2 text-sm text-slate-600">Quick currency conversion using current market exchange rates.</p>
             </div>
         </section>
 
@@ -92,7 +92,8 @@
         @endphp
 
         <section id="converter" class="rounded-3xl border border-slate-200 bg-white px-6 py-10 shadow-sm sm:px-10">
-            <h2 class="text-center text-3xl font-bold text-slate-900 sm:text-4xl">Global currency conversions</h2>
+            <h2 class="text-center text-3xl font-bold text-slate-900 sm:text-4xl">Quick Currency Converter</h2>
+            <p class="mt-2 text-center text-slate-600">Convert currencies using today's live exchange rates</p>
 
             <form action="{{ route('convert') }}" method="POST" class="mt-10">
                 @csrf
@@ -121,9 +122,9 @@
                             </select>
                             <button type="button" onclick="toggleDropdown('from')" class="form-input w-full cursor-pointer py-4 pl-12 pr-10 text-left text-base font-medium text-slate-700 transition hover:border-slate-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-4">
-                                    <img id="from-flag" src="/flags/{{ strtolower($selectedFrom) }}.svg" alt="{{ $selectedFrom }}" class="h-6 w-6 rounded object-cover">
+                                    <img id="from-flag" src="/flags/{{ strtolower($selectedFrom) }}.svg" alt="{{ $selectedFrom }}" class="h-5 w-8 rounded object-contain">
                                 </span>
-                                <span id="from-selected-text">{{ $selectedFrom }} - {{ $currencies[$selectedFrom] }}</span>
+                                <span id="from-selected-text" class="ml-2">{{ $selectedFrom }} - {{ $currencies[$selectedFrom] }}</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-3">
                                     <svg id="from-chevron" class="h-5 w-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -132,10 +133,31 @@
                             </button>
                             <div id="from-dropdown" class="absolute z-10 mt-2 hidden w-full rounded-xl border border-slate-200 bg-white shadow-lg">
                                 <div class="max-h-64 overflow-y-auto p-2">
+                                    {{-- Popular currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Popular</div>
+                                    @php
+                                        $popularCodes = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'INR', 'SGD'];
+                                    @endphp
+                                    @foreach ($popularCodes as $code)
+                                        @if(isset($currencies[$code]))
+                                            <div onclick="selectCurrency('from', '{{ $code }}', '{{ $currencies[$code] }}')" 
+                                                 class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
+                                                <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
+                                                <span class="font-medium text-slate-700">{{ $code }}</span>
+                                                <span class="text-slate-500">{{ $currencies[$code] }}</span>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    
+                                    {{-- Divider --}}
+                                    <div class="my-2 border-t border-slate-100"></div>
+                                    
+                                    {{-- All currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">All Currencies</div>
                                     @foreach ($currencies as $code => $name)
                                         <div onclick="selectCurrency('from', '{{ $code }}', '{{ $name }}')" 
                                              class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
-                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-6 w-6 rounded object-cover">
+                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
                                             <span class="font-medium text-slate-700">{{ $code }}</span>
                                             <span class="text-slate-500">{{ $name }}</span>
                                         </div>
@@ -170,9 +192,9 @@
                             </select>
                             <button type="button" onclick="toggleDropdown('to')" class="form-input w-full cursor-pointer py-4 pl-12 pr-10 text-left text-base font-medium text-slate-700 transition hover:border-slate-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-4">
-                                    <img id="to-flag" src="/flags/{{ strtolower($selectedTo) }}.svg" alt="{{ $selectedTo }}" class="h-6 w-6 rounded object-cover">
+                                    <img id="to-flag" src="/flags/{{ strtolower($selectedTo) }}.svg" alt="{{ $selectedTo }}" class="h-5 w-8 rounded object-contain">
                                 </span>
-                                <span id="to-selected-text">{{ $selectedTo }} - {{ $currencies[$selectedTo] }}</span>
+                                <span id="to-selected-text" class="ml-2">{{ $selectedTo }} - {{ $currencies[$selectedTo] }}</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-3">
                                     <svg id="to-chevron" class="h-5 w-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -181,10 +203,31 @@
                             </button>
                             <div id="to-dropdown" class="absolute z-10 mt-2 hidden w-full rounded-xl border border-slate-200 bg-white shadow-lg">
                                 <div class="max-h-64 overflow-y-auto p-2">
+                                    {{-- Popular currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Popular</div>
+                                    @php
+                                        $popularCodes = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'INR', 'SGD'];
+                                    @endphp
+                                    @foreach ($popularCodes as $code)
+                                        @if(isset($currencies[$code]))
+                                            <div onclick="selectCurrency('to', '{{ $code }}', '{{ $currencies[$code] }}')" 
+                                                 class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
+                                                <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
+                                                <span class="font-medium text-slate-700">{{ $code }}</span>
+                                                <span class="text-slate-500">{{ $currencies[$code] }}</span>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    
+                                    {{-- Divider --}}
+                                    <div class="my-2 border-t border-slate-100"></div>
+                                    
+                                    {{-- All currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">All Currencies</div>
                                     @foreach ($currencies as $code => $name)
                                         <div onclick="selectCurrency('to', '{{ $code }}', '{{ $name }}')" 
                                              class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
-                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-6 w-6 rounded object-cover">
+                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
                                             <span class="font-medium text-slate-700">{{ $code }}</span>
                                             <span class="text-slate-500">{{ $name }}</span>
                                         </div>
@@ -282,60 +325,88 @@
         </section>
 
         <section class="grid gap-6 lg:grid-cols-5">
-            <div class="glass-panel hidden p-7 lg:col-span-3 sm:p-8">
-                <!-- Hidden - keeping for structure but not displaying -->
+            <!-- Popular Currency Pairs -->
+            <div class="glass-panel p-7 lg:col-span-3 sm:p-8">
+                <h3 class="text-lg font-semibold text-slate-900">Popular Currency Pairs</h3>
+                <p class="mt-1 text-sm text-slate-600">Jump straight into a chart for the most traded pairs.</p>
+
+                <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    @php
+                        $pairs = [
+                            ['from' => 'GBP', 'to' => 'USD', 'label' => 'GBP / USD'],
+                            ['from' => 'EUR', 'to' => 'USD', 'label' => 'EUR / USD'],
+                            ['from' => 'GBP', 'to' => 'EUR', 'label' => 'GBP / EUR'],
+                            ['from' => 'USD', 'to' => 'JPY', 'label' => 'USD / JPY'],
+                            ['from' => 'GBP', 'to' => 'JPY', 'label' => 'GBP / JPY'],
+                            ['from' => 'USD', 'to' => 'CHF', 'label' => 'USD / CHF'],
+                            ['from' => 'EUR', 'to' => 'GBP', 'label' => 'EUR / GBP'],
+                            ['from' => 'AUD', 'to' => 'USD', 'label' => 'AUD / USD'],
+                            ['from' => 'USD', 'to' => 'CAD', 'label' => 'USD / CAD'],
+                        ];
+                    @endphp
+                    @foreach ($pairs as $pair)
+                        <a href="/charts?from={{ $pair['from'] }}&to={{ $pair['to'] }}"
+                           class="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700">
+                            <div class="flex -space-x-1.5 shrink-0">
+                                <img src="/flags/{{ strtolower($pair['from']) }}.svg" alt="{{ $pair['from'] }}" class="h-4 w-6 rounded-sm object-contain ring-1 ring-white">
+                                <img src="/flags/{{ strtolower($pair['to']) }}.svg" alt="{{ $pair['to'] }}" class="h-4 w-6 rounded-sm object-contain ring-1 ring-white">
+                            </div>
+                            <span>{{ $pair['label'] }}</span>
+                            <svg class="ml-auto h-3.5 w-3.5 text-slate-400 transition group-hover:text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    @endforeach
+                </div>
             </div>
 
+            <!-- Data Coverage -->
             <div class="min-w-0 space-y-6 lg:col-span-2">
                 <div class="glass-panel p-7">
-                    <h3 class="text-lg font-semibold text-slate-900">Live Result</h3>
-                    <p class="mt-1 text-sm text-slate-600">Current conversion output and quoted rate.</p>
+                    <h3 class="text-lg font-semibold text-slate-900">Data Coverage</h3>
+                    <p class="mt-1 text-sm text-slate-600">What's included in the historical dataset.</p>
 
-                    <div class="mt-6 space-y-5">
-                        <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500">From</p>
-                            <p class="mt-1 text-2xl font-semibold text-slate-900">{{ isset($amount) ? number_format($amount, 2) : '0.00' }}</p>
-                            <p class="mt-1 text-sm text-slate-600">{{ $from_currency ?? 'USD' }}</p>
+                    <div class="mt-5 space-y-3">
+                        <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+                            <span class="text-sm text-slate-600">Date Range</span>
+                            <span class="text-sm font-semibold text-slate-900">1994 – Present</span>
                         </div>
-
-                        <div class="flex items-center justify-center text-blue-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
+                        <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+                            <span class="text-sm text-slate-600">Snapshots</span>
+                            <span class="text-sm font-semibold text-slate-900">8,177 daily</span>
                         </div>
-
-                        <div class="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                            <p class="text-xs font-semibold uppercase tracking-wide text-blue-700">To</p>
-                            <p class="mt-1 text-2xl font-semibold text-blue-700">{{ isset($converted_amount) ? number_format($converted_amount, 2) : '0.00' }}</p>
-                            <p class="mt-1 text-sm text-blue-700/80">{{ $to_currency ?? 'EUR' }}</p>
+                        <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+                            <span class="text-sm text-slate-600">Exchange Rates</span>
+                            <span class="text-sm font-semibold text-slate-900">262,000+</span>
+                        </div>
+                        <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+                            <span class="text-sm text-slate-600">Base Currency</span>
+                            <span class="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                                <img src="/flags/gbp.svg" alt="GBP" class="h-3.5 w-5 rounded-sm object-contain">
+                                GBP
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
+                            <span class="text-sm text-slate-600">API Access</span>
+                            <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Available</span>
                         </div>
                     </div>
-
-                    @if (isset($rate, $from_currency, $to_currency))
-                        <div class="mt-6 rounded-xl border border-slate-200 bg-white p-4 text-sm">
-                            <span class="font-semibold text-slate-700">Exchange Rate:</span>
-                            <span class="font-mono text-slate-900"> 1 {{ $from_currency }} = {{ number_format($rate, 4) }} {{ $to_currency }}</span>
-                        </div>
-                    @endif
                 </div>
 
-                <div id="developer" class="glass-panel min-w-0 p-7">
-                    <h3 class="text-lg font-semibold text-slate-900">Developer Friendly</h3>
-                    <p class="mt-1 text-sm text-slate-600">Use your API key to integrate conversion into apps and internal tools.</p>
-
-                    <div class="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">Endpoint</p>
-                        <div class="overflow-x-auto">
-                            <p class="w-max min-w-full whitespace-nowrap font-mono text-sm text-slate-900">GET {{ config('app.url') }}/api/v1/convert</p>
-                        </div>
+                <a href="/charts" class="glass-panel flex items-center gap-4 p-6 transition hover:border-blue-200 hover:bg-blue-50/50 group">
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-100 group-hover:bg-blue-200 transition">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
                     </div>
-
-                    <div class="mt-4 rounded-xl border border-slate-200 bg-slate-900 p-4">
-                        <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Example Request</p>
-                        <pre class="max-w-full overflow-x-auto whitespace-nowrap text-xs leading-6 text-emerald-300">curl -X GET "{{ config('app.url') }}/api/v1/convert?amount=100&from=GBP&to=USD" \
-  -H "Authorization: Bearer YOUR_API_KEY"</pre>
+                    <div>
+                        <p class="font-semibold text-slate-900 group-hover:text-blue-700 transition">Explore Historical Charts</p>
+                        <p class="mt-0.5 text-sm text-slate-500">Interactive charts with up to 32 years of data</p>
                     </div>
-                </div>
+                    <svg class="ml-auto h-5 w-5 text-slate-400 group-hover:text-blue-500 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </section>
     </div>

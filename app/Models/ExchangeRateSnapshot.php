@@ -16,6 +16,12 @@ class ExchangeRateSnapshot extends Model
         'is_complete',
     ];
 
+    protected $casts = [
+        'rate_date' => 'date',
+        'fetched_at' => 'datetime',
+        'is_complete' => 'boolean',
+    ];
+
     public function rates()
     {
         return $this->hasMany(ExchangeRate::class);

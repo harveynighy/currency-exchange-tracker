@@ -19,7 +19,15 @@ class ExchangeRateSnapshotService
 
     public function __construct()
     {
-        $this->apiKey = env('EXCHANGE_API_KEY');
+        $this->apiVersion = (string) config('services.exchange_rate.api_version', 'v6');
+
+        $apiKey = config('services.exchange_rate.api_key');
+
+        if (! is_string($apiKey) || trim($apiKey) === '') {
+            throw new \RuntimeException('Missing EXCHANGE_API_KEY. Please set it in your environment configuration.');
+        }
+
+        $this->apiKey = $apiKey;
         // GET https://v6.exchangerate-api.com/v6/YOUR-API-KEY/history/USD/YEAR/MONTH/DAY
         $this->apiUrl = 'https://' . $this->apiVersion . '.exchangerate-api.com/' . $this->apiVersion . '/' . $this->apiKey . '/history';
     }

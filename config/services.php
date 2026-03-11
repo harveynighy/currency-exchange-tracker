@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'exchange_rate' => [
+        'api_key' => env('EXCHANGE_API_KEY'),
+        'api_version' => env('EXCHANGE_API_VERSION', 'v6'),
+    ],
+
 ];

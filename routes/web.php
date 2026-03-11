@@ -4,11 +4,19 @@ use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\ExchangeRateController;
+use App\Http\Controllers\HistoricalRatesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ExchangeRateController::class, 'index'])->name('home');
 Route::post('/convert', [ExchangeRateController::class, 'convert'])->name('convert');
+
+// Historical Charts Routes
+Route::get('/charts', [HistoricalRatesController::class, 'index'])->name('charts.index');
+Route::get('/charts/data', [HistoricalRatesController::class, 'getData'])->name('charts.data');
+
+// API Documentation
+Route::view('/api-docs', 'api-docs')->name('api-docs');
 
 // Profile Routes
 Route::middleware('auth')->group(function () {

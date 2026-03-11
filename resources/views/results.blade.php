@@ -1,12 +1,18 @@
 <x-layout>
     <div class="w-full space-y-10">
         <!-- Back to converter -->
-        <div>
+        <div class="flex items-center justify-between">
             <a href="/" class="inline-flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
                 Back to home
+            </a>
+            <a href="/charts" class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700">
+                View Historical Charts
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19l7-7-7-7"></path>
+                </svg>
             </a>
         </div>
 
@@ -16,7 +22,8 @@
 
         <!-- Converter Section -->
         <section class="rounded-3xl border border-slate-200 bg-white px-6 py-10 shadow-sm sm:px-10">
-            <h2 class="text-center text-3xl font-bold text-slate-900 sm:text-4xl">Global currency conversions</h2>
+            <h2 class="text-center text-3xl font-bold text-slate-900 sm:text-4xl">Convert Another Amount</h2>
+            <p class="mt-2 text-center text-slate-600">Quick currency conversion using live rates</p>
 
             <form action="{{ route('convert') }}" method="POST" class="mt-10">
                 @csrf
@@ -45,9 +52,9 @@
                             </select>
                             <button type="button" onclick="toggleDropdown('from')" class="form-input w-full cursor-pointer py-4 pl-12 pr-10 text-left text-base font-medium text-slate-700 transition hover:border-slate-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-4">
-                                    <img id="from-flag" src="/flags/{{ strtolower($from_currency) }}.svg" alt="{{ $from_currency }}" class="h-6 w-6 rounded object-cover">
+                                    <img id="from-flag" src="/flags/{{ strtolower($from_currency) }}.svg" alt="{{ $from_currency }}" class="h-5 w-8 rounded object-contain">
                                 </span>
-                                <span id="from-selected-text">{{ $from_currency }} - {{ $currencies[$from_currency] }}</span>
+                                <span id="from-selected-text" class="ml-2">{{ $from_currency }} - {{ $currencies[$from_currency] }}</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-3">
                                     <svg id="from-chevron" class="h-5 w-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -56,10 +63,31 @@
                             </button>
                             <div id="from-dropdown" class="absolute z-10 mt-2 hidden w-full rounded-xl border border-slate-200 bg-white shadow-lg">
                                 <div class="max-h-64 overflow-y-auto p-2">
+                                    {{-- Popular currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Popular</div>
+                                    @php
+                                        $popularCodes = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'INR', 'SGD'];
+                                    @endphp
+                                    @foreach ($popularCodes as $code)
+                                        @if(isset($currencies[$code]))
+                                            <div onclick="selectCurrency('from', '{{ $code }}', '{{ $currencies[$code] }}')" 
+                                                 class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
+                                                <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
+                                                <span class="font-medium text-slate-700">{{ $code }}</span>
+                                                <span class="text-slate-500">{{ $currencies[$code] }}</span>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    
+                                    {{-- Divider --}}
+                                    <div class="my-2 border-t border-slate-100"></div>
+                                    
+                                    {{-- All currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">All Currencies</div>
                                     @foreach ($currencies as $code => $name)
                                         <div onclick="selectCurrency('from', '{{ $code }}', '{{ $name }}')" 
                                              class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
-                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-6 w-6 rounded object-cover">
+                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
                                             <span class="font-medium text-slate-700">{{ $code }}</span>
                                             <span class="text-slate-500">{{ $name }}</span>
                                         </div>
@@ -94,9 +122,9 @@
                             </select>
                             <button type="button" onclick="toggleDropdown('to')" class="form-input w-full cursor-pointer py-4 pl-12 pr-10 text-left text-base font-medium text-slate-700 transition hover:border-slate-400">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-4">
-                                    <img id="to-flag" src="/flags/{{ strtolower($to_currency) }}.svg" alt="{{ $to_currency }}" class="h-6 w-6 rounded object-cover">
+                                    <img id="to-flag" src="/flags/{{ strtolower($to_currency) }}.svg" alt="{{ $to_currency }}" class="h-5 w-8 rounded object-contain">
                                 </span>
-                                <span id="to-selected-text">{{ $to_currency }} - {{ $currencies[$to_currency] }}</span>
+                                <span id="to-selected-text" class="ml-2">{{ $to_currency }} - {{ $currencies[$to_currency] }}</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-3">
                                     <svg id="to-chevron" class="h-5 w-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -105,10 +133,31 @@
                             </button>
                             <div id="to-dropdown" class="absolute z-10 mt-2 hidden w-full rounded-xl border border-slate-200 bg-white shadow-lg">
                                 <div class="max-h-64 overflow-y-auto p-2">
+                                    {{-- Popular currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">Popular</div>
+                                    @php
+                                        $popularCodes = ['USD', 'EUR', 'GBP', 'JPY', 'AUD', 'CAD', 'CHF', 'CNY', 'INR', 'SGD'];
+                                    @endphp
+                                    @foreach ($popularCodes as $code)
+                                        @if(isset($currencies[$code]))
+                                            <div onclick="selectCurrency('to', '{{ $code }}', '{{ $currencies[$code] }}')" 
+                                                 class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
+                                                <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
+                                                <span class="font-medium text-slate-700">{{ $code }}</span>
+                                                <span class="text-slate-500">{{ $currencies[$code] }}</span>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    
+                                    {{-- Divider --}}
+                                    <div class="my-2 border-t border-slate-100"></div>
+                                    
+                                    {{-- All currencies --}}
+                                    <div class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">All Currencies</div>
                                     @foreach ($currencies as $code => $name)
                                         <div onclick="selectCurrency('to', '{{ $code }}', '{{ $name }}')" 
                                              class="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-sm transition hover:bg-slate-50">
-                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-6 w-6 rounded object-cover">
+                                            <img src="/flags/{{ strtolower($code) }}.svg" alt="{{ $code }}" class="h-5 w-8 rounded object-contain">
                                             <span class="font-medium text-slate-700">{{ $code }}</span>
                                             <span class="text-slate-500">{{ $name }}</span>
                                         </div>
