@@ -10,7 +10,7 @@
         <article class="space-y-8">
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">1. API Access</h2>
-                <p class="text-slate-700">FX Tracker provides API access to authenticated users. By using our API, you agree to these API Terms and all applicable policies.</p>
+                <p class="text-slate-700">FX Tracker provides authenticated access to a historical exchange rate API. The API currently supports currency-pair queries over date ranges and is governed by these API Terms and all applicable platform policies.</p>
             </section>
 
             <section>
@@ -25,11 +25,12 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">3. Rate Limiting</h2>
-                <p class="text-slate-700">API usage is subject to rate limits:</p>
+                <p class="text-slate-700">API usage is subject to monthly plan quotas and platform protection limits:</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
-                    <li>Standard tier: 100 requests per minute</li>
-                    <li>Enterprise tier: Custom limits by agreement</li>
-                    <li>Exceeding limits will result in HTTP 429 responses</li>
+                    <li>Free plan: 750 historical API requests per calendar month</li>
+                    <li>Pro plan: 10,000 historical API requests per calendar month</li>
+                    <li>Business plan: 50,000 historical API requests per calendar month</li>
+                    <li>Exceeding your monthly allowance will result in HTTP 429 responses until the next monthly reset or plan upgrade</li>
                     <li>Persistent abuse may result in account suspension</li>
                 </ul>
             </section>
@@ -38,8 +39,8 @@
                 <h2 class="text-2xl font-semibold text-slate-900">4. API Response Accuracy</h2>
                 <p class="text-slate-700">While we strive for accuracy, FX Tracker makes no warranties regarding:</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
-                    <li>Timeliness of exchange rate updates</li>
-                    <li>Complete accuracy of conversion calculations</li>
+                    <li>Timeliness, completeness, or uninterrupted availability of historical dataset updates</li>
+                    <li>Complete accuracy of derived cross-rate calculations</li>
                     <li>Continuous availability of the API</li>
                 </ul>
             </section>
@@ -54,7 +55,7 @@
                 <p class="text-slate-700">Data obtained through the API:</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
                     <li>Must not be resold or redistributed</li>
-                    <li>Should not be cached for more than 1 hour</li>
+                    <li>May be cached by you for reasonable internal use, provided you do not misrepresent the data as your own source</li>
                     <li>Must include proper attribution to FX Tracker</li>
                     <li>Cannot be used to create competitive products</li>
                 </ul>
@@ -71,19 +72,19 @@
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
                     <li>Violation of these API Terms</li>
                     <li>Suspicious or malicious activity</li>
-                    <li>Non-payment of applicable fees</li>
+                    <li>Non-payment of applicable fees for manually provisioned paid plans</li>
                     <li>Legal or compliance requirements</li>
                 </ul>
             </section>
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">9. Support and Documentation</h2>
-                <p class="text-slate-700">Complete API documentation is available in your developer dashboard. Support inquiries can be directed to api@infinitefinances.com</p>
+                <p class="text-slate-700">Complete API documentation is available on our API documentation page. Paid plans can be purchased through online checkout and managed through the billing portal where available. Support inquiries can be directed to api@infinitefinances.com</p>
             </section>
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">10. Liability Disclaimer</h2>
-                <p class="text-slate-700">FX Tracker is not liable for any damages arising from API usage, including data loss, business interruption, or financial losses resulting from inaccurate conversions.</p>
+                <p class="text-slate-700">FX Tracker is not liable for any damages arising from API usage, including data loss, business interruption, or financial losses resulting from inaccurate historical data or derived calculations.</p>
             </section>
         </article>
     </div>

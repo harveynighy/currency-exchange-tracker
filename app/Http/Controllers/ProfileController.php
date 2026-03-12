@@ -13,13 +13,17 @@ class ProfileController extends Controller
 {
     public function show()
     {
+        $user = Auth::user();
         $conversions = Conversion::where('user_id', Auth::user()->id)
             ->latest()
             ->get();
 
         return view('profile.show', [
-            'user' => Auth::user(),
-            'conversions' => $conversions
+            'user' => $user,
+            'conversions' => $conversions,
+            'apiPlans' => config('api_plans.plans'),
+            'currentApiUsage' => $user->currentMonthlyApiUsage(),
+            'currentApiLimit' => $user->monthlyApiRequestLimit(),
         ]);
     }
 

@@ -31,13 +31,14 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">3. API Usage Guidelines</h2>
-                <p class="text-slate-700">When using the FX Tracker API, you must:</p>
+                <p class="text-slate-700">When using the FX Tracker historical API, you must:</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
                     <li>Keep your API key confidential and secure</li>
                     <li>Not share API keys with unauthorized parties</li>
-                    <li>Respect rate limits and usage quotas</li>
+                    <li>Respect your monthly plan quota and any short-term protective limits</li>
                     <li>Implement reasonable caching to minimize requests</li>
                     <li>Use appropriate error handling</li>
+                    <li>Not attempt to circumvent plan limits by rotating accounts, keys, or identities</li>
                 </ul>
             </section>
 

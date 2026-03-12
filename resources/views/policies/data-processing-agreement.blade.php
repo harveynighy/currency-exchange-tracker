@@ -10,12 +10,12 @@
         <article class="space-y-8">
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">1. Purpose</h2>
-                <p class="text-slate-700">This Data Processing Agreement (DPA) governs the processing of personal data by FX Tracker in accordance with GDPR, CCPA, and other applicable data protection laws.</p>
+                <p class="text-slate-700">This Data Processing Agreement (DPA) describes how FX Tracker processes personal data in connection with account management, historical API access, and related platform features, in accordance with applicable data protection laws.</p>
             </section>
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">2. Data Controller and Processor</h2>
-                <p class="text-slate-700">When using FX Tracker, Infinite Finances acts as the data controller. Users maintain control over their personal data and can request deletion or modification at any time.</p>
+                <p class="text-slate-700">When using FX Tracker, Infinite Finances acts as the data controller for account, authentication, and service-usage data collected through the platform. Users can request deletion or modification of their personal data subject to legal and operational retention requirements.</p>
             </section>
 
             <section>
@@ -49,11 +49,16 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">6. Sub-processors</h2>
-                <p class="text-slate-700">We notify users of any changes to sub-processors and maintain a current list available upon request.</p>
+                <p class="text-slate-700">We may use hosting, infrastructure, analytics, communications, and payment processing providers to operate the platform. This includes Stripe for paid subscription checkout and invoice processing. We will maintain information about material sub-processors and provide additional details upon reasonable request where required by law.</p>
             </section>
 
             <section>
-                <h2 class="text-2xl font-semibold text-slate-900">7. Contact for Data Requests</h2>
+                <h2 class="text-2xl font-semibold text-slate-900">7. Security and Incident Response</h2>
+                <p class="text-slate-700">We implement technical and organizational security controls appropriate to the nature of the data processed. In the event of a confirmed personal data breach, we will follow applicable legal notification requirements.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-semibold text-slate-900">8. Contact for Data Requests</h2>
                 <p class="text-slate-700">Submit data subject requests to: dpa@infinitefinances.com</p>
             </section>
         </article>

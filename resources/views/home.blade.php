@@ -5,7 +5,7 @@
                 <div>
                     <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">32 Years of Historical Data</p>
                     <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">FX Historical Analysis Platform</h1>
-                    <p class="mt-4 max-w-xl text-base text-slate-600">Explore three decades of currency exchange rate trends with interactive charts, comprehensive API access, and real-time conversion tools.</p>
+                    <p class="mt-4 max-w-xl text-base text-slate-600">Explore three decades of currency exchange rate trends with interactive charts, historical API access, and fast currency conversion tools.</p>
                     <div class="mt-7 flex flex-wrap items-center gap-3">
                         <a href="/charts" class="primary-btn">Explore Charts</a>
                         <a href="#converter" class="secondary-btn">Quick Convert</a>
@@ -41,8 +41,8 @@
             </div>
             <div class="glass-panel p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Developer API</p>
-                <p class="mt-2 text-2xl font-semibold text-slate-900">Historical endpoints</p>
-                <p class="mt-2 text-sm text-slate-600">Access historical exchange rate data programmatically via REST API.</p>
+                <p class="mt-2 text-2xl font-semibold text-slate-900">Historical range API</p>
+                <p class="mt-2 text-sm text-slate-600">Query historical exchange rate data by currency pair and date range via REST API.</p>
             </div>
             <div class="glass-panel p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Live Conversion</p>
@@ -373,21 +373,21 @@
                         </div>
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
                             <span class="text-sm text-slate-600">Snapshots</span>
-                            <span class="text-sm font-semibold text-slate-900">8,177 daily</span>
+                            <span class="text-sm font-semibold text-slate-900">8,179 daily</span>
                         </div>
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
                             <span class="text-sm text-slate-600">Exchange Rates</span>
-                            <span class="text-sm font-semibold text-slate-900">262,000+</span>
+                            <span class="text-sm font-semibold text-slate-900">253,969 total</span>
                         </div>
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
                             <span class="text-sm text-slate-600">Base Currency</span>
                             <span class="flex items-center gap-2 text-sm font-semibold text-slate-900">
-                                <img src="/flags/gbp.svg" alt="GBP" class="h-3.5 w-5 rounded-sm object-contain">
-                                GBP
+                                <img src="/flags/usd.svg" alt="USD" class="h-3.5 w-5 rounded-sm object-contain">
+                                USD
                             </span>
                         </div>
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
-                            <span class="text-sm text-slate-600">API Access</span>
+                            <span class="text-sm text-slate-600">Historical API</span>
                             <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Available</span>
                         </div>
                     </div>
@@ -401,7 +401,7 @@
                     </div>
                     <div>
                         <p class="font-semibold text-slate-900 group-hover:text-blue-700 transition">Explore Historical Charts</p>
-                        <p class="mt-0.5 text-sm text-slate-500">Interactive charts with up to 32 years of data</p>
+                        <p class="mt-0.5 text-sm text-slate-500">Interactive charts powered by 32 years of USD-based historical data</p>
                     </div>
                     <svg class="ml-auto h-5 w-5 text-slate-400 group-hover:text-blue-500 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

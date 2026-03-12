@@ -40,4 +40,9 @@ return [
         'api_version' => env('EXCHANGE_API_VERSION', 'v6'),
     ],
 
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
 ];

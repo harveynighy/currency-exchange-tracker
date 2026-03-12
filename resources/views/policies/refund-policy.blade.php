@@ -10,22 +10,22 @@
         <article class="space-y-8">
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">1. Overview</h2>
-                <p class="text-slate-700">FX Tracker is a service-based platform providing currency conversion and exchange rate tracking services. This policy outlines our refund terms and conditions.</p>
+                <p class="text-slate-700">FX Tracker provides a web platform, historical API access, and account-based tools for currency analysis. This policy outlines our current refund position.</p>
             </section>
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">2. Free Tier Services</h2>
-                <p class="text-slate-700">FX Tracker offers a free tier with no charges. Users can use the platform indefinitely at no cost with standard features.</p>
+                <p class="text-slate-700">FX Tracker offers a free plan with no subscription charge. The free plan includes limited historical API access and standard platform features at no cost.</p>
             </section>
 
             <section>
-                <h2 class="text-2xl font-semibold text-slate-900">3. Paid Services (if applicable)</h2>
-                <p class="text-slate-700">If premium services become available in the future, the following refund policy applies:</p>
+                <h2 class="text-2xl font-semibold text-slate-900">3. Paid Plans</h2>
+                <p class="text-slate-700">Paid API plans are available via online checkout and may also be provisioned by direct arrangement where applicable.</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
-                    <li>Refund requests must be submitted within 30 days of purchase</li>
-                    <li>Full refunds are available if services have not been substantially used</li>
-                    <li>Partial refunds may be provided for partial usage</li>
-                    <li>Refunds will be processed to the original payment method within 5-7 business days</li>
+                    <li>Checkout purchases are billed through our payment processor and are subject to the plan terms displayed at checkout</li>
+                    <li>Any separately negotiated billing terms communicated in a written quote, invoice, or email agreement will govern that purchase</li>
+                    <li>If a refund is approved, it will be issued using the original payment method unless otherwise agreed</li>
+                    <li>Refund decisions are made on a case-by-case basis where no separate written commercial terms apply</li>
                 </ul>
             </section>
 
@@ -34,14 +34,14 @@
                 <p class="text-slate-700">The following are non-refundable:</p>
                 <ul class="list-inside list-disc space-y-2 text-slate-700">
                     <li>Services already rendered and completed</li>
-                    <li>API access charges after 30 days of service initiation</li>
+                    <li>Paid API access already provisioned and materially used, unless otherwise required by law or agreed in writing</li>
                     <li>Beta or trial services</li>
                 </ul>
             </section>
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">5. Cancellation</h2>
-                <p class="text-slate-700">Users may cancel their account and cease service at any time. Upon cancellation, access to premium features will be immediately revoked.</p>
+                <p class="text-slate-700">Users may cancel their account and stop using the service at any time. If a manually provisioned paid API plan is canceled, any change in access level will follow the terms of the applicable written agreement.</p>
             </section>
 
             <section>

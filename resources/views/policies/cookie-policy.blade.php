@@ -33,7 +33,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">3. Third-Party Cookies</h2>
-                <p class="text-slate-700">We may use third-party services that place cookies on your device. These are governed by their respective privacy policies.</p>
+                <p class="text-slate-700">We may use third-party services that place cookies or similar technologies on your device (for example, security or payment session support). These technologies are governed by the providers' own privacy policies.</p>
             </section>
 
             <section>

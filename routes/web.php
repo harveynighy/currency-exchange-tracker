@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Login;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\HistoricalRatesController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,15 @@ Route::middleware('auth')->group(function () {
         ->name('profile.api-key.generate');
     Route::delete('/profile/api-key/revoke', [ProfileController::class, 'revokeApiKey'])
         ->name('profile.api-key.revoke');
+
+    Route::post('/billing/checkout', [BillingController::class, 'checkout'])
+        ->name('billing.checkout');
+    Route::post('/billing/portal', [BillingController::class, 'portal'])
+        ->name('billing.portal');
+    Route::get('/billing/success', [BillingController::class, 'success'])
+        ->name('billing.success');
+    Route::get('/profile/invoices', [BillingController::class, 'invoices'])
+        ->name('profile.invoices');
 });
 
 // Register Routes

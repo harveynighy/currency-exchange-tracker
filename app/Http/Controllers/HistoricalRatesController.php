@@ -57,7 +57,8 @@ class HistoricalRatesController extends Controller
             $base = 'USD';
 
             $db = \Illuminate\Support\Facades\DB::table('exchange_rate_snapshots as s')
-                ->whereBetween('s.rate_date', [$startDate, $endDate])
+                ->whereDate('s.rate_date', '>=', $startDate)
+                ->whereDate('s.rate_date', '<=', $endDate)
                 ->where('s.base', $base)
                 ->where('s.is_complete', true)
                 ->orderBy('s.rate_date', 'asc');

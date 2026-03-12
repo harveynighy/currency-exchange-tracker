@@ -77,6 +77,39 @@
                 <p class="mt-1 text-sm text-slate-600">Manage your API key for programmatic access</p>
             </div>
 
+            <div class="mb-6 grid gap-4 lg:grid-cols-3">
+                <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 lg:col-span-2">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Current Plan</p>
+                    <div class="mt-2 flex flex-wrap items-center gap-3">
+                        <span class="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">{{ $user->apiPlanName() }}</span>
+                        <span class="text-sm text-slate-600">{{ number_format($currentApiUsage) }} / {{ number_format($currentApiLimit) }} requests used this month</span>
+                    </div>
+                    <div class="mt-4 h-2 overflow-hidden rounded-full bg-slate-200">
+                        <div class="h-full rounded-full bg-blue-600" style="width: {{ min(100, $currentApiLimit > 0 ? ($currentApiUsage / $currentApiLimit) * 100 : 0) }}%"></div>
+                    </div>
+                    <p class="mt-3 text-xs text-slate-500">Monthly quotas reset automatically on the first day of each month.</p>
+                    <div class="mt-4">
+                        <a href="{{ route('profile.invoices') }}" class="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50">View Invoices</a>
+                    </div>
+                </div>
+                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-amber-700">Upgrade</p>
+                    <p class="mt-2 text-sm text-amber-900">Upgrade instantly with secure Stripe checkout for larger monthly API quotas.</p>
+                    @if ($user->stripe_customer_id)
+                        <form method="POST" action="{{ route('billing.portal') }}" class="mt-3">
+                            @csrf
+                            <button type="submit" class="w-full rounded-lg border border-amber-300 bg-white px-3 py-2 text-xs font-semibold text-amber-800 transition hover:bg-amber-100">Manage billing</button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+
+            @if (session('billing_error'))
+                <div class="mb-6 rounded-xl border border-red-300 bg-red-50 px-6 py-4">
+                    <p class="text-sm font-medium text-red-800">{{ session('billing_error') }}</p>
+                </div>
+            @endif
+
             @if (session('api_key'))
                 <div class="mb-6 rounded-xl border border-blue-300 bg-blue-50 px-6 py-4">
                     <div class="flex items-start">
@@ -137,13 +170,13 @@
                 </div>
             @else
                 <div class="space-y-4">
-                    <p class="text-sm text-slate-600">You don't have an API key yet. Generate one to access the Currency
-                        Exchange API programmatically.</p>
+                    <p class="text-sm text-slate-600">You don't have an API key yet. Generate one to access the historical
+                        exchange rate API programmatically.</p>
 
                     <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
                         <h4 class="mb-2 text-sm font-semibold text-slate-700">API Endpoint</h4>
                         <code class="text-xs font-mono text-slate-800">GET
-                            {{ config('app.url') }}/api/v1/convert?amount=100&from=GBP&to=USD</code>
+                            {{ config('app.url') }}/api/v1/history?from=GBP&to=USD&start_date=2026-02-01&end_date=2026-03-01</code>
                     </div>
 
                     <form method="POST" action="{{ route('profile.api-key.generate') }}">
@@ -154,6 +187,52 @@
                     </form>
                 </div>
             @endif
+        </div>
+
+        <div class="glass-panel p-8 sm:p-10">
+            <div class="mb-6 border-b border-slate-200 pb-4">
+                <h2 class="text-xl font-semibold text-slate-900">API Plans</h2>
+                <p class="mt-1 text-sm text-slate-600">Choose a monthly request allowance that fits your usage.</p>
+            </div>
+
+            <div class="grid gap-4 lg:grid-cols-3">
+                @foreach ($apiPlans as $planKey => $plan)
+                    <div class="rounded-2xl border {{ $user->api_plan === $planKey ? 'border-blue-300 bg-blue-50/60' : 'border-slate-200 bg-white' }} p-5">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-900">{{ $plan['name'] }}</h3>
+                                <p class="mt-1 text-sm text-slate-600">{{ $plan['description'] }}</p>
+                            </div>
+                            @if ($user->api_plan === $planKey)
+                                <span class="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">Current</span>
+                            @endif
+                        </div>
+
+                        <p class="mt-5 text-3xl font-bold text-slate-900">{{ $plan['price_label'] }}</p>
+                        <p class="mt-2 text-sm text-slate-600">{{ number_format($plan['monthly_requests']) }} historical API requests per month</p>
+
+                        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+                            <li>Historical data by date range</li>
+                            <li>Currency pair queries</li>
+                            <li>Bearer token authentication</li>
+                        </ul>
+
+                        <div class="mt-5">
+                            @if ($user->api_plan === $planKey)
+                                <span class="inline-flex rounded-lg border border-blue-300 bg-blue-100 px-3 py-2 text-xs font-semibold text-blue-700">Current plan</span>
+                            @elseif (!empty($plan['stripe_price_id']))
+                                <form method="POST" action="{{ route('billing.checkout') }}">
+                                    @csrf
+                                    <input type="hidden" name="plan" value="{{ $planKey }}">
+                                    <button type="submit" class="w-full rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">Upgrade with Stripe</button>
+                                </form>
+                            @else
+                                <span class="inline-flex rounded-lg border border-slate-300 bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700">Included</span>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
 
         <div class="glass-panel p-8 sm:p-10">
