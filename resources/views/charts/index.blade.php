@@ -84,8 +84,10 @@
                         <p class="mt-3 text-sm font-medium text-slate-600">Loading historical data...</p>
                     </div>
                     
-                    <div id="chart-container" class="rounded-xl border border-slate-200 bg-white p-6">
-                        <canvas id="rates-chart" class="w-full" style="max-height: 500px;"></canvas>
+                    <div id="chart-container" class="rounded-xl border border-slate-200 bg-white p-4 sm:p-6">
+                        <div style="height: 600px; position: relative;">
+                            <canvas id="rates-chart" class="w-full" style="max-height: 600px;"></canvas>
+                        </div>
                     </div>
 
                     <div id="chart-stats" class="mt-4 grid gap-4 sm:grid-cols-4">
@@ -190,7 +192,8 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
+                    devicePixelRatio: window.devicePixelRatio || 1,
                     interaction: {
                         mode: 'index',
                         intersect: false,
@@ -255,6 +258,16 @@
         // Event listeners
         document.getElementById('chart-from').addEventListener('change', loadChartData);
         document.getElementById('chart-to').addEventListener('change', loadChartData);
+
+        // Handle window resize for responsive chart height
+        window.addEventListener('resize', () => {
+            if (chart) {
+                const canvas = document.getElementById('rates-chart');
+                const chartHeight = getChartHeight();
+                canvas.style.maxHeight = chartHeight + 'px';
+                chart.resize();
+            }
+        });
 
         // Load initial data
         loadChartData();
