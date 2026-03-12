@@ -3,7 +3,7 @@
         <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
                 <div>
-                    <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">32 Years of Historical Data</p>
+                    <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">30+ Years of Historical Data</p>
                     <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">FX Historical Analysis Platform</h1>
                     <p class="mt-4 max-w-xl text-base text-slate-600">Explore three decades of currency exchange rate trends with interactive charts, historical API access, and fast currency conversion tools.</p>
                     <div class="mt-7 flex flex-wrap items-center gap-3">
@@ -15,7 +15,7 @@
                 <div class="grid grid-cols-2 gap-4 text-sm">
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">Historical Data</p>
-                        <p class="mt-1 font-semibold text-slate-900">1994 - Present</p>
+                        <p class="mt-1 font-semibold text-slate-900">1994 – 11 Mar 2026</p>
                     </div>
                     <div class="glass-panel p-4">
                         <p class="text-slate-500">Currencies</p>
@@ -36,7 +36,7 @@
         <section class="grid gap-4 md:grid-cols-3">
             <div class="glass-panel p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Historical Charts</p>
-                <p class="mt-2 text-2xl font-semibold text-slate-900">32 years of data</p>
+                <p class="mt-2 text-2xl font-semibold text-slate-900">30+ years of data</p>
                 <p class="mt-2 text-sm text-slate-600">Visualize decades of currency trends with interactive charts and analysis tools.</p>
             </div>
             <div class="glass-panel p-5">
@@ -244,8 +244,8 @@
                 <!-- Promotional Banner + Convert Button -->
                 <div class="mx-auto mt-8 grid max-w-5xl items-center gap-6 lg:grid-cols-2">
                     <div class="rounded-2xl border border-blue-100 bg-blue-50/50 px-6 py-4">
-                        <p class="font-semibold text-slate-800">Looking to make large transfers?</p>
-                        <p class="text-sm text-slate-600">We can beat competitor rates</p>
+                        <p class="font-semibold text-slate-800">Rates sourced from ExchangeRate-API</p>
+                        <p class="text-sm text-slate-600">Live market rates updated every 24 hours</p>
                     </div>
 
                     <button type="submit" class="rounded-2xl bg-blue-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-blue-700">
@@ -369,7 +369,7 @@
                     <div class="mt-5 space-y-3">
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
                             <span class="text-sm text-slate-600">Date Range</span>
-                            <span class="text-sm font-semibold text-slate-900">1994 – Present</span>
+                            <span class="text-sm font-semibold text-slate-900">1994 – 11 Mar 2026</span>
                         </div>
                         <div class="flex items-center justify-between rounded-lg border border-slate-100 bg-slate-50 px-4 py-3">
                             <span class="text-sm text-slate-600">Snapshots</span>
@@ -401,7 +401,7 @@
                     </div>
                     <div>
                         <p class="font-semibold text-slate-900 group-hover:text-blue-700 transition">Explore Historical Charts</p>
-                        <p class="mt-0.5 text-sm text-slate-500">Interactive charts powered by 32 years of USD-based historical data</p>
+                        <p class="mt-0.5 text-sm text-slate-500">Interactive charts powered by 30+ years of USD-based historical data (1994 – 11 Mar 2026)</p>
                     </div>
                     <svg class="ml-auto h-5 w-5 text-slate-400 group-hover:text-blue-500 transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

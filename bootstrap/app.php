@@ -13,7 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'api.auth' => \App\Http\Middleware\AuthenticateApiKey::class,
+            'api.auth'  => \App\Http\Middleware\AuthenticateApiKey::class,
+            'api.plan'  => \App\Http\Middleware\RequireApiPlan::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

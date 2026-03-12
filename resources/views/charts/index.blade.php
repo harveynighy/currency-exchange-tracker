@@ -3,9 +3,9 @@
         <!-- Hero Section -->
         <section class="rounded-3xl border border-blue-100 bg-gradient-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
             <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">32 Years of Data</p>
+                <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Data through 11 Mar 2026</p>
                 <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Historical Exchange Rate Analysis</h1>
-                <p class="mt-4 text-lg text-slate-600">Explore over three decades of currency exchange rate trends and patterns across 50+ global currencies.</p>
+                <p class="mt-4 text-lg text-slate-600">Explore over three decades of currency exchange rate trends and patterns across 50+ global currencies. Data covers 1994 to 11 March 2026.</p>
             </div>
         </section>
 
