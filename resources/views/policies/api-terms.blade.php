@@ -46,7 +46,19 @@
             </section>
 
             <section>
-                <h2 class="text-2xl font-semibold text-slate-900">5. Uptime and Service Level</h2>
+                <h2 class="text-2xl font-semibold text-slate-900">5. Historical Data Coverage</h2>
+                <p class="text-slate-700">The historical exchange rate dataset provided through the API has the following limitations:</p>
+                <ul class="list-inside list-disc space-y-2 text-slate-700">
+                    <li>Data is provided for <strong>business days only</strong> (Monday–Friday), excluding weekends and public holidays</li>
+                    <li>Not every calendar day is represented in the dataset</li>
+                    <li>Historical gaps may exist for certain date ranges or currency pairs depending on data source availability</li>
+                    <li>The number of data points returned reflects available snapshots; gaps do not indicate API errors</li>
+                    <li>Users should validate the data returned and not assume daily coverage</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-semibold text-slate-900">6. Uptime and Service Level</h2>
                 <p class="text-slate-700">We aim to maintain 99% uptime, but cannot guarantee 100% availability. Scheduled maintenance and emergencies may cause temporary service interruptions.</p>
             </section>
 

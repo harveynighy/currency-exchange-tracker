@@ -108,11 +108,12 @@
                             <p id="stat-avg" class="mt-1 text-lg font-semibold text-slate-900">-</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Quick Converter Link -->
+                    <!-- Data Note -->
+                    <div class="mt-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-900">Note: Business Days Only</p>
+                        <p class="mt-2 text-sm text-amber-800">The historical dataset covers business days only (Monday–Friday), excluding weekends and public holidays. Some historical date ranges or currency pairs may have gaps. The number of data points shown reflects available business-day snapshots for your selected date range.</p>
+                    </div>
         <section class="rounded-2xl border border-slate-200 bg-white px-6 py-8 text-center">
             <h3 class="text-xl font-semibold text-slate-900">Need a Quick Conversion?</h3>
             <p class="mt-2 text-slate-600">Convert currencies using today's live exchange rates</p>

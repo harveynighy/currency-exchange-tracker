@@ -391,6 +391,11 @@
                             <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">Available</span>
                         </div>
                     </div>
+
+                    <div class="mt-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-amber-900">Data Availability Note</p>
+                        <p class="mt-2 text-sm text-amber-800">The dataset does <strong>not include every single day</strong>. Data is available for business days only (Monday–Friday), excluding weekends and public holidays. Historical gaps may exist for certain date ranges or currencies depending on when data was available from our sources.</p>
+                    </div>
                 </div>
 
                 <a href="/charts" class="glass-panel flex items-center gap-4 p-6 transition hover:border-blue-200 hover:bg-blue-50/50 group">

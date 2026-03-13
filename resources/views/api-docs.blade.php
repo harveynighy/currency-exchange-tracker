@@ -644,6 +644,11 @@
                     @endforeach
                 </div>
                 <p class="text-sm text-slate-600">Historical data covers <strong>1994 to 11 March 2026</strong>. Coverage may vary by currency — query only currencies present in your stored dataset.</p>
+
+                <div class="mt-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4">
+                    <p class="text-xs font-semibold uppercase tracking-wider text-amber-900">Important: Data Availability</p>
+                    <p class="mt-2 text-sm text-amber-800"><strong>Not all days are included in the dataset.</strong> Data is provided for business days only — Monday through Friday, excluding weekends and public holidays. Additionally, certain historical date ranges or currency pairs may have gaps depending on data source availability. Always validate the number of data points returned for your query to confirm coverage.</p>
+                </div>
             </div>
         </section>
 
