@@ -66,7 +66,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">6. Reporting Violations</h2>
-                <p class="text-slate-700">If you encounter a violation of this policy, please report it to: abuse@infinitefinances.com</p>
+                <p class="text-slate-700">If you encounter a violation of this policy, please report it to: support@infinitefinances.co.uk</p>
             </section>
 
             <section>

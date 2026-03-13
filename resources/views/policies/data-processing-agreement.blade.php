@@ -59,7 +59,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">8. Contact for Data Requests</h2>
-                <p class="text-slate-700">Submit data subject requests to: dpa@infinitefinances.com</p>
+                <p class="text-slate-700">Submit data subject requests to: support@infinitefinances.co.uk</p>
             </section>
         </article>
     </div>

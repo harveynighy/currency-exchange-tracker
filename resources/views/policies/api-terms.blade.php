@@ -79,7 +79,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">9. Support and Documentation</h2>
-                <p class="text-slate-700">Complete API documentation is available on our API documentation page. Paid plans can be purchased through online checkout and managed through the billing portal where available. Support inquiries can be directed to api@infinitefinances.com</p>
+                <p class="text-slate-700">Complete API documentation is available on our API documentation page. Paid plans can be purchased through online checkout and managed through the billing portal where available. Support inquiries can be directed to support@infinitefinances.co.uk</p>
             </section>
 
             <section>

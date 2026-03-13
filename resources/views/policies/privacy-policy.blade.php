@@ -79,7 +79,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">10. Contact Us</h2>
-                <p class="text-slate-700">If you have questions about this Privacy Policy or data protection requests, contact us at privacy@infinitefinances.com</p>
+                <p class="text-slate-700">If you have questions about this Privacy Policy or data protection requests, contact us at support@infinitefinances.co.uk</p>
             </section>
         </article>
     </div>

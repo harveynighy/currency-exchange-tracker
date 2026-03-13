@@ -46,7 +46,7 @@
 
             <section>
                 <h2 class="text-2xl font-semibold text-slate-900">6. Request Process</h2>
-                <p class="text-slate-700">To request a refund, contact our support team at support@infinitefinances.com with your account details and reason for the refund request.</p>
+                <p class="text-slate-700">To request a refund, contact our support team at support@infinitefinances.co.uk with your account details and reason for the refund request.</p>
             </section>
 
             <section>
