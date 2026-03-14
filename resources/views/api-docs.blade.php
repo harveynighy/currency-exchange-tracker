@@ -1,4 +1,8 @@
-<x-layout>
+<x-layout
+    title="Currency Exchange API Documentation | FX Tracker"
+    description="Developer documentation for FX Tracker API with historical currency exchange rates, endpoints, authentication, and integration examples."
+    keywords="currency exchange API, exchange rates API, historical FX API, forex API documentation, currency data API"
+>
     <div class="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-8">
         <!-- Header -->
         <div class="border-b border-slate-200 pb-8">

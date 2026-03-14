@@ -9,14 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class HistoricalRatesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $currencies = config('currencies.supported');
+        $supported = array_keys($currencies);
+
+        $defaultFrom = strtoupper((string) $request->query('from', 'GBP'));
+        $defaultTo = strtoupper((string) $request->query('to', 'USD'));
+
+        if (!in_array($defaultFrom, $supported, true)) {
+            $defaultFrom = 'GBP';
+        }
+
+        if (!in_array($defaultTo, $supported, true)) {
+            $defaultTo = 'USD';
+        }
         
         return view('charts.index', [
             'currencies' => $currencies,
-            'defaultFrom' => 'GBP',
-            'defaultTo' => 'USD',
+            'defaultFrom' => $defaultFrom,
+            'defaultTo' => $defaultTo,
         ]);
     }
 

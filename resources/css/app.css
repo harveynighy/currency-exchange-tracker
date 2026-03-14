@@ -58,4 +58,69 @@
     .table-shell {
         @apply overflow-hidden rounded-2xl border border-slate-200 bg-white;
     }
+
+    .markdown-content {
+        @apply text-[1.02rem] leading-8 text-slate-700;
+    }
+
+    .markdown-content > * + * {
+        @apply mt-5;
+    }
+
+    .markdown-content h1 {
+        @apply mt-8 text-3xl font-bold tracking-tight text-slate-900;
+    }
+
+    .markdown-content h2 {
+        @apply mt-8 text-2xl font-semibold tracking-tight text-slate-900;
+    }
+
+    .markdown-content h3 {
+        @apply mt-7 text-xl font-semibold text-slate-900;
+    }
+
+    .markdown-content p {
+        @apply text-slate-700;
+    }
+
+    .markdown-content a {
+        @apply font-medium text-blue-700 underline decoration-blue-300 decoration-2 underline-offset-2 transition hover:text-blue-800;
+    }
+
+    .markdown-content ul,
+    .markdown-content ol {
+        @apply space-y-2 pl-6;
+    }
+
+    .markdown-content ul {
+        @apply list-disc;
+    }
+
+    .markdown-content ol {
+        @apply list-decimal;
+    }
+
+    .markdown-content li {
+        @apply text-slate-700;
+    }
+
+    .markdown-content blockquote {
+        @apply rounded-r-xl border-l-4 border-blue-500 bg-blue-50 px-4 py-3 text-slate-700;
+    }
+
+    .markdown-content hr {
+        @apply my-8 border-slate-200;
+    }
+
+    .markdown-content code {
+        @apply rounded-md bg-slate-100 px-1.5 py-0.5 text-sm text-slate-800;
+    }
+
+    .markdown-content pre {
+        @apply overflow-x-auto rounded-xl border border-slate-200 bg-slate-900 p-4 text-slate-100;
+    }
+
+    .markdown-content pre code {
+        @apply bg-transparent p-0 text-sm text-slate-100;
+    }
 }

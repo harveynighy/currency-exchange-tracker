@@ -1,4 +1,8 @@
-<x-layout>
+<x-layout
+    title="Currency Rate Tracker & Exchange Calculator | FX Tracker"
+    description="Track live currency exchange rates, convert between 50+ currencies, and explore 30+ years of historical FX data with our currency rate tracker."
+    keywords="currency rate tracker, currency exchange, exchange rates, currency converter, forex rates, FX tracker, live currency rates, historical exchange rates"
+>
     <div class="w-full space-y-10">
         <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
             <div class="grid gap-8 lg:grid-cols-2 lg:items-center">

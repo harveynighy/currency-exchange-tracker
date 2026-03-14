@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\Register;
 use App\Http\Controllers\Auth\Logout;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ExchangeRateController;
 use App\Http\Controllers\HistoricalRatesController;
+use App\Http\Controllers\MoneyPageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,85 @@ Route::post('/convert', [ExchangeRateController::class, 'convert'])->name('conve
 // Historical Charts Routes
 Route::get('/charts', [HistoricalRatesController::class, 'index'])->name('charts.index');
 Route::get('/charts/data', [HistoricalRatesController::class, 'getData'])->name('charts.data');
+Route::view('/faq', 'faq')->name('faq');
+Route::view('/how-exchange-rates-work', 'seo.how-exchange-rates-work')->name('seo.how-exchange-rates-work');
+Route::view('/currency-glossary', 'seo.currency-glossary')->name('seo.currency-glossary');
+
+// Money pages (SEO landing pages)
+Route::get('/exchange-rates', [MoneyPageController::class, 'index'])->name('money.index');
+Route::get('/exchange-rate/{from}-to-{to}', [MoneyPageController::class, 'show'])->name('money.show');
+
+// Blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+
+Route::get('/sitemap.xml', function () {
+    $moneyPairs = [
+        ['from' => 'USD', 'to' => 'EUR'],
+        ['from' => 'EUR', 'to' => 'USD'],
+        ['from' => 'GBP', 'to' => 'USD'],
+        ['from' => 'USD', 'to' => 'GBP'],
+        ['from' => 'USD', 'to' => 'JPY'],
+        ['from' => 'EUR', 'to' => 'GBP'],
+        ['from' => 'USD', 'to' => 'CAD'],
+        ['from' => 'USD', 'to' => 'AUD'],
+        ['from' => 'USD', 'to' => 'CHF'],
+        ['from' => 'USD', 'to' => 'INR'],
+        ['from' => 'USD', 'to' => 'CNY'],
+        ['from' => 'AUD', 'to' => 'USD'],
+    ];
+
+    $urls = [
+        route('home'),
+        route('charts.index'),
+        route('faq'),
+        route('seo.how-exchange-rates-work'),
+        route('seo.currency-glossary'),
+        route('money.index'),
+        route('blog.index'),
+        route('api-docs'),
+        route('privacy-policy'),
+        route('cookie-policy'),
+        route('terms-of-service'),
+        route('refund-policy'),
+        route('acceptable-use-policy'),
+        route('data-processing-agreement'),
+        route('api-terms'),
+    ];
+
+    foreach ($moneyPairs as $pair) {
+        $urls[] = route('money.show', ['from' => $pair['from'], 'to' => $pair['to']]);
+    }
+
+    $blogUrls = collect(config('blog.posts', []))
+        ->filter(function (array $post) {
+            if (!(bool) ($post['is_published'] ?? true)) {
+                return false;
+            }
+
+            if (!isset($post['published_at'])) {
+                return true;
+            }
+
+            return now()->gte(\Illuminate\Support\Carbon::parse($post['published_at']));
+        })
+        ->pluck('slug')
+        ->map(fn ($slug) => route('blog.show', ['slug' => $slug]))
+        ->all();
+
+    $urls = array_merge($urls, $blogUrls);
+
+    return response()
+        ->view('sitemap', [
+            'urls' => $urls,
+            'lastmod' => now()->toAtomString(),
+        ])
+        ->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 // API Documentation
 Route::view('/api-docs', 'api-docs')->name('api-docs');
+
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Profile Routes
 Route::middleware('auth')->group(function () {

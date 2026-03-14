@@ -16,10 +16,25 @@ class ExchangeRateController extends Controller
         $this->exchangeService = $exchangeService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Just show the home page with the form
-        return view('home');
+        $supported = array_keys(config('currencies.supported', []));
+
+        $from = strtoupper((string) $request->query('from', 'USD'));
+        $to = strtoupper((string) $request->query('to', 'EUR'));
+
+        if (!in_array($from, $supported, true)) {
+            $from = 'USD';
+        }
+
+        if (!in_array($to, $supported, true)) {
+            $to = 'EUR';
+        }
+
+        return view('home', [
+            'from_currency' => $from,
+            'to_currency' => $to,
+        ]);
     }
 
     public function convert(Request $request)
