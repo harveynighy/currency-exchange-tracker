@@ -22,15 +22,5 @@ return [
             'view' => 'blog.posts.brexit-referendum-impact-on-gbp',
             'is_published' => true,
         ],
-        [
-            'title' => 'Template: How Major UK Events Moved GBP Exchange Rates',
-            'slug' => 'template-uk-events-moved-gbp-exchange-rates',
-            'excerpt' => 'Template article outlining how major UK historical and macro events affected GBP pricing against major currencies.',
-            'currency_tags' => ['GBP'],
-            'published_at' => '2026-03-14 11:08:50',
-            'author' => 'FX Tracker',
-            'view' => 'blog.posts.template-uk-events-moved-gbp-exchange-rates',
-            'is_published' => true,
-        ],
     ],
 ];

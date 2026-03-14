@@ -68,6 +68,7 @@ class BlogController extends Controller
         return collect(config('blog.posts', []))
             ->map(function (array $post) {
                 $publishedAt = isset($post['published_at']) ? Carbon::parse($post['published_at']) : now();
+                $view = $post['view'] ?? null;
 
                 return (object) [
                     'title' => $post['title'],
@@ -77,11 +78,11 @@ class BlogController extends Controller
                     'published_at' => $publishedAt,
                     'updated_at' => $publishedAt,
                     'author' => $post['author'] ?? 'FX Tracker',
-                    'view' => $post['view'] ?? null,
+                    'view' => $view,
                     'is_published' => (bool) ($post['is_published'] ?? true),
                 ];
             })
-            ->filter(fn ($post) => $post->is_published && $post->published_at->lte(now()))
+            ->filter(fn ($post) => $post->is_published && $post->published_at->lte(now()) && !empty($post->view) && view()->exists($post->view))
             ->values();
     }
 }
