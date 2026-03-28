@@ -22,7 +22,7 @@
                     <a href="/profile" class="">Profile</a>
                     <form method="POST" action="/logout">
                         @csrf
-                        <button type="submit" class="">Logout</button>
+                        <button type="submit" class="btn">Logout</button>
                     </form>
                 @else
                     <a href="/login" class="btn">Login</a>
