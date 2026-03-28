@@ -2,6 +2,11 @@
     title="Currency Rate Tracker FAQ | FX Tracker"
     description="Frequently asked questions about currency exchange rates, historical FX charts, API access, and using FX Tracker for live currency conversion."
     keywords="currency rate tracker FAQ, exchange rate FAQ, currency converter questions, FX API questions, historical exchange rates FAQ"
+    page-type="faq"
+    header="header-regular"
+    hero-tag="faq"
+    hero-title="Frequently Asked Questions"
+    hero-description="Everything you need to know about our currency rate tracker, exchange tools, historical data, and API."
 >
     @php
         $faqs = [
@@ -54,14 +59,6 @@
     @endphp
 
     <div class="w-full space-y-10">
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Help & Support</p>
-                <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Frequently Asked Questions</h1>
-                <p class="mt-4 text-lg text-slate-600">Everything you need to know about our currency rate tracker, exchange tools, historical data, and API.</p>
-            </div>
-        </section>
-
         <section class="mx-auto max-w-4xl space-y-4">
             @foreach ($faqs as $item)
                 <details class="group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

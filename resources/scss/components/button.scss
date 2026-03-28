@@ -1,0 +1,34 @@
+.btn {
+    display: flex;
+    padding: 12px 20px 12px 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.312px;
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 12px 20px 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background: #fff;
+    color: #030213;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.312px;
+}

@@ -2,6 +2,8 @@
     :title="$post->title . ' | FX Tracker Blog'"
     :description="$post->excerpt ?: 'Currency analysis from FX Tracker.'"
     :keywords="implode(', ', array_map(fn($tag) => strtolower($tag) . ' exchange rate', $post->currency_tags ?? []))"
+    header="header-blog-post"
+    page-type="article"
 >
     @php
         $articleSchema = [

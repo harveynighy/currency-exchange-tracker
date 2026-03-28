@@ -2,6 +2,8 @@
     title="Live Currency Exchange Results | FX Tracker"
     description="View live currency conversion results and continue converting with current exchange rates and historical chart access."
     keywords="currency conversion results, live exchange rate, currency exchange calculator, forex conversion"
+    page-type="results"
+
 >
     <div class="w-full space-y-10">
         <!-- Back to converter -->

@@ -2,16 +2,14 @@
     title="Currency Market Blog & Analysis | FX Tracker"
     description="Read currency market analysis and historical event breakdowns. Filter blog posts by currency to find focused FX insights."
     keywords="currency blog, forex analysis, exchange rate news, historical currency events, FX insights"
+    hero="hero-blog"
+    page-type="blog"
+    hero-tag="blog"
+    hero-title="Currency Market Blog"
+    hero-description="Explore how economic and historical events affected exchange rates across major currencies."
+
 >
     <div class="w-full space-y-10">
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Analysis & Commentary</p>
-                <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Currency Market Blog</h1>
-                <p class="mt-4 text-lg text-slate-600">Explore how economic and historical events affected exchange rates across major currencies.</p>
-            </div>
-        </section>
-
         <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <form action="{{ route('blog.index') }}" method="GET" class="flex flex-wrap items-center gap-3">

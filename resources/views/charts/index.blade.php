@@ -2,17 +2,13 @@
     title="Historical Currency Exchange Charts & Trends | FX Tracker"
     description="Analyze historical currency exchange rates with interactive charts across 50+ currencies. Compare FX trends over 7 days to all-time periods."
     keywords="historical exchange rates, currency exchange charts, FX trends, forex history, currency pair analysis, exchange rate history"
+    header="header-regular"
+    page-type="charts"
+    hero-tag="charts"
+    hero-title="Historical Exchange Rate Analysis"
+    hero-description="Explore over three decades of currency exchange rate trends and patterns across 50+ global currencies. Data covers 1994 to 11 March 2026."
 >
     <div class="w-full space-y-10">
-        <!-- Hero Section -->
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Data through 11 Mar 2026</p>
-                <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Historical Exchange Rate Analysis</h1>
-                <p class="mt-4 text-lg text-slate-600">Explore over three decades of currency exchange rate trends and patterns across 50+ global currencies. Data covers 1994 to 11 March 2026.</p>
-            </div>
-        </section>
-
         <!-- Chart Controls -->
         <section class="rounded-3xl border border-slate-200 bg-white px-6 py-10 shadow-sm sm:px-10">
             <div class="mx-auto max-w-5xl">

@@ -1,4 +1,9 @@
-<x-layout>
+<x-layout
+title="Terms of Service | FX Tracker"
+    header="header-regular"
+    hero-tag="policy"
+    hero-title="Terms of Service"
+    hero-description="Effective Date: March 2026">
     <div class="max-w-4xl">
         <!-- Hero Section -->
         <div class="mb-12 rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12">

@@ -2,41 +2,10 @@
     title="Currency Rate Tracker & Exchange Calculator | FX Tracker"
     description="Track live currency exchange rates, convert between 50+ currencies, and explore 30+ years of historical FX data with our currency rate tracker."
     keywords="currency rate tracker, currency exchange, exchange rates, currency converter, forex rates, FX tracker, live currency rates, historical exchange rates"
+    header="header-extended"
+    page-type="home"
 >
     <div class="w-full space-y-10">
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="grid gap-8 lg:grid-cols-2 lg:items-center">
-                <div>
-                    <p class="mb-3 inline-flex items-center rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">30+ Years of Historical Data</p>
-                    <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">FX Historical Analysis Platform</h1>
-                    <p class="mt-4 max-w-xl text-base text-slate-600">Explore three decades of currency exchange rate trends with interactive charts, historical API access, and fast currency conversion tools.</p>
-                    <div class="mt-7 flex flex-wrap items-center gap-3">
-                        <a href="/charts" class="primary-btn">Explore Charts</a>
-                        <a href="#converter" class="secondary-btn">Quick Convert</a>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 text-sm">
-                    <div class="glass-panel p-4">
-                        <p class="text-slate-500">Historical Data</p>
-                        <p class="mt-1 font-semibold text-slate-900">1994 – 11 Mar 2026</p>
-                    </div>
-                    <div class="glass-panel p-4">
-                        <p class="text-slate-500">Currencies</p>
-                        <p class="mt-1 font-semibold text-slate-900">50 Supported</p>
-                    </div>
-                    <div class="glass-panel p-4">
-                        <p class="text-slate-500">Data Points</p>
-                        <p class="mt-1 font-semibold text-slate-900">254K+ Rates</p>
-                    </div>
-                    <div class="glass-panel p-4">
-                        <p class="text-slate-500">System Status</p>
-                        <p class="mt-1 font-semibold text-emerald-700">Operational</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="grid gap-4 md:grid-cols-3">
             <div class="glass-panel p-5">
                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Historical Charts</p>

@@ -1,11 +1,12 @@
-<x-layout>
+<x-layout
+    title="Privacy Policy | FX Tracker"
+    description="Read FX Tracker's Privacy Policy to understand how we collect, use, and protect your data when you access our historical API and paid billing features."
+    keywords="privacy policy, data protection, historical API, billing, user data, GDPR"
+    header="header-regular"
+    hero-tag="policy"
+    hero-title="Privacy Policy"
+    hero-description="Effective Date: March 2026">
     <div class="max-w-4xl">
-        <!-- Hero Section -->
-        <div class="mb-12 rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12">
-            <h1 class="text-4xl font-bold text-slate-900">Privacy Policy</h1>
-            <p class="mt-2 text-slate-600">Effective Date: March 2026</p>
-        </div>
-
         <!-- Content -->
         <article class="prose prose-slate max-w-none space-y-8">
             <section>

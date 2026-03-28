@@ -2,16 +2,12 @@
     title="Top Currency Exchange Rate Pages | FX Tracker"
     description="Browse high-interest currency exchange pairs with dedicated pages for live conversion and historical trend analysis."
     keywords="currency exchange rates, usd to eur, gbp to usd, eur to usd, fx pairs"
+    header="header-regular"
+    hero-tag="money-pages"
+    hero-title="Top Currency Exchange Pages"
+    hero-description="Open dedicated pages for major currency pairs and jump straight to conversion and charts."
 >
     <div class="w-full space-y-10">
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Popular Pairs</p>
-                <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Top Currency Exchange Pages</h1>
-                <p class="mt-4 text-lg text-slate-600">Open dedicated pages for major currency pairs and jump straight to conversion and charts.</p>
-            </div>
-        </section>
-
         <section class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             @foreach ($pairs as $pair)
                 @php

@@ -2,6 +2,10 @@
     :title="$from . ' to ' . $to . ' Exchange Rate, Charts & Converter | FX Tracker'"
     :description="'Track ' . $from . ' to ' . $to . ' exchange rates with live conversion and historical FX charts on FX Tracker.'"
     :keywords="strtolower($from . ' to ' . $to . ', ' . $from . ' ' . $to . ' exchange rate, ' . $from . ' ' . $to . ' converter, currency exchange')"
+    header="header-regular"
+    hero-tag="money-pages"
+    hero-title="{{ $from }} to {{ $to }} Exchange Rate"
+    hero-description="Convert {{ $fromName }} to {{ $toName }} and explore historical exchange-rate trends."
 >
     @php
         $faqSchema = [
@@ -29,18 +33,6 @@
     @endphp
 
     <div class="w-full space-y-10">
-        <section class="rounded-3xl border border-blue-100 bg-linear-to-r from-blue-50 to-white px-8 py-12 sm:px-12">
-            <div class="mx-auto max-w-4xl text-center">
-                <p class="mb-3 inline-flex rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-blue-700">Currency Pair</p>
-                <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{{ $from }} to {{ $to }} Exchange Rate</h1>
-                <p class="mt-4 text-lg text-slate-600">Convert {{ $fromName }} to {{ $toName }} and explore historical exchange-rate trends.</p>
-                <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-                    <a href="{{ route('home', ['from' => $from, 'to' => $to]) }}" class="primary-btn">Convert {{ $from }} → {{ $to }}</a>
-                    <a href="{{ route('charts.index', ['from' => $from, 'to' => $to]) }}" class="secondary-btn">View {{ $from }}/{{ $to }} Chart</a>
-                </div>
-            </div>
-        </section>
-
         <section class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h2 class="text-lg font-semibold text-slate-900">Pair Overview</h2>

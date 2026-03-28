@@ -2,14 +2,13 @@
     title="Currency Exchange API Documentation | FX Tracker"
     description="Developer documentation for FX Tracker API with historical currency exchange rates, endpoints, authentication, and integration examples."
     keywords="currency exchange API, exchange rates API, historical FX API, forex API documentation, currency data API"
+    page-type="api-doc"
+    hero-tag="api-doc"
+    hero-title="API Documentation"
+    hero-description="Complete reference for FX Tracker's historical exchange rate API. All endpoints require a valid API key."
+
 >
     <div class="mx-auto max-w-5xl space-y-8 px-4 py-8 sm:px-8">
-        <!-- Header -->
-        <div class="border-b border-slate-200 pb-8">
-            <h1 class="text-4xl font-bold tracking-tight text-slate-900">API Documentation</h1>
-            <p class="mt-3 text-lg text-slate-600">Complete reference for FX Tracker's historical exchange rate API. All endpoints require a valid API key.</p>
-        </div>
-
         <!-- Plan Tier Overview -->
         <section class="space-y-4">
             <h2 class="text-2xl font-bold text-slate-900">Endpoint Access by Plan</h2>
